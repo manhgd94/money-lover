@@ -35,6 +35,7 @@ class AppController extends Controller {
 		'RequestHandler',
 		'Session',
 		'Cookie',
+		'Flash',
 		'Auth' => array(
 			'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
 			'logoutRedirect' => array('controller' => 'users', 'action' => 'login')
