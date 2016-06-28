@@ -28,7 +28,7 @@
 		</dd>
 		<dt><?php echo __('Avatar'); ?></dt>
 		<dd>
-			<?php echo h($user['User']['avatar']); ?>
+			<?php echo $this->Html->image(h($user['User']['avatar']), array('alt' => 'avatar', 'class'=>'avatar-img')); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Verified'); ?></dt>

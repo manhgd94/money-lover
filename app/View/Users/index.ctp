@@ -24,7 +24,7 @@
 		<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['password']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['avatar']); ?>&nbsp;</td>
+		<td><?php echo $this->Html->image(h($user['User']['avatar']), array('alt' => 'avatar', 'class'=>'avatar-img')); ?></td>
 		<td><?php echo h($user['User']['verified']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['verifiecation_code']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['created']); ?>&nbsp;</td>
