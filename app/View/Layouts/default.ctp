@@ -44,10 +44,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 			<?php echo $this->Flash->render(); ?>
 
-			<?php if(isset($userlogin)){ echo "Hello ".$userlogin['username']; ?>
+			<?php if(isset($userlogin)): echo "Hello ".$userlogin['name']; ?>
 			<span><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout')); ?></span>
-			<?php } ?>
-			
+			<?php endif ?>
+
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
