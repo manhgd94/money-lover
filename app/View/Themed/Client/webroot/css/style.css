@@ -1,0 +1,66 @@
+.header, .content, .footer{
+	width: 100%;
+}
+.content{
+	padding-top: 70px;
+}
+.footer{
+	position: relative;
+	bottom: 0px;
+	height: 60px;
+	background-color: #f5f5f5;
+}
+.footer .container{
+	padding: 10px 15px 15px 0px;
+}
+.pull-right{
+	height: 40px;
+	line-height: 40px;
+}
+.form-signin{
+	max-width: 330px;
+	margin: 0px auto;
+}
+.form-control.username, .form-control.password{
+	height: 50px;
+}
+.btn.btn-lg.btn-primary.btn-block{
+	margin-top: 20px;
+}
+.search .form-control{
+	width: 200px;
+	float: left;
+	margin-right: 5px;
+}
+.search .button{
+	float: left;
+	margin-right: 5px;
+}
+.panel .avatar{
+	float: left;
+	width: 50%;
+	padding: 0px 5%;
+}
+.panel .info{
+	float: left;
+	width: 50%;
+}
+.success{
+	color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.error{
+	color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+.message{
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+img.avatar-img{
+	width: 210px;
+}
