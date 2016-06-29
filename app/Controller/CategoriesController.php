@@ -46,6 +46,10 @@ class CategoriesController extends AppController {
  * @return void
  */
 	public function add() {
+		$options = array('conditions' => array('pid'=>0));
+		$opt = $this->Category->find('list',$options);
+		$opt[0]= "Đặt làm nhóm chính";
+        $this->set('opt', $opt);
 		if ($this->request->is('post')) {
 			$this->Category->create();
 			if ($this->Category->save($this->request->data)) {
@@ -65,6 +69,8 @@ class CategoriesController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+		$options = array('conditions' => array('pid'=>0));
+        $this->set('opt', $this->Category->find('list',$options));
 		if (!$this->Category->exists($id)) {
 			throw new NotFoundException(__('Invalid category'));
 		}
