@@ -25,8 +25,8 @@ class User extends AppModel {
 		),
 		'username' => array(
 			'notBlank' => array(
-				'rule' => array('notBlank'),
-				//'message' => 'Your custom message here',
+				'rule' => 'isUnique',
+				'message' => 'The username has already been taken',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule

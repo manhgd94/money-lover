@@ -47,7 +47,7 @@ class UsersController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$filename = $_SERVER['DOCUMENT_ROOT']."/User-git/app/webroot/img/".$this->data['User']['avatar']['name'];
+			$filename = $_SERVER['DOCUMENT_ROOT']."/cakephp/money-lover/app/webroot/img/".$this->data['User']['avatar']['name'];
 			$this->User->create();
 			if (move_uploaded_file($this->data['User']['avatar']['tmp_name'],$filename)) {
 				$this->request->data['User']['avatar'] = $this->data['User']['avatar']['name'];
