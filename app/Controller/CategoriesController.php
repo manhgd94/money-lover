@@ -70,7 +70,9 @@ class CategoriesController extends AppController {
  */
 	public function edit($id = null) {
 		$options = array('conditions' => array('pid'=>0));
-        $this->set('opt', $this->Category->find('list',$options));
+		$opt = $this->Category->find('list',$options);
+		$opt[0]= "Đặt làm nhóm chính";
+        $this->set('opt', $opt);
 		if (!$this->Category->exists($id)) {
 			throw new NotFoundException(__('Invalid category'));
 		}

@@ -4,7 +4,7 @@
 	<thead>
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('pid'); ?></th>
+			<th><?php echo $this->Paginator->sort('pid', 'Nhóm chính'); ?></th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
 			<th><?php echo $this->Paginator->sort('type'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -16,7 +16,11 @@
 		<td><?php echo h($category['Category']['id']); ?>&nbsp;</td>
 		<td><?php echo h($category['Category']['pid']); ?>&nbsp;</td>
 		<td><?php echo h($category['Category']['name']); ?>&nbsp;</td>
-		<td><?php echo h($category['Category']['type']); ?>&nbsp;</td>
+		<td><?php if (h($category['Category']['type'])===false) {
+						echo "Thu";
+					}else{
+						echo "Chi";
+						} ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $category['Category']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $category['Category']['id'])); ?>
