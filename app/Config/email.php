@@ -50,7 +50,7 @@ class EmailConfig {
         'port' => 465,
         'timeout' => 30,
         'username' => 'manhgd94@gmail.com',
-        'password' => 'ynwhtgytbbckpcbk',
+        'password' => 'vbzxsxskxabzkldh',
         'client' => null,
         'log' => false
 		//'charset' => 'utf-8',

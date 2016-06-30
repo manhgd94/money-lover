@@ -129,7 +129,7 @@ class UsersController extends AppController {
 //login-logout
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('login'); // Letting users register themselves
+		$this->Auth->allow('login', 'verify'); // Letting users register themselves
 	}
 
 	public function login() {
