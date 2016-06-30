@@ -9,8 +9,6 @@
 		echo $this->Form->input('email');
 		echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class'=>'avatar-img'));
 		echo $this->Form->input('avatar', array('type'=>'file'));
-		// echo $this->Form->input('verified');
-		// echo $this->Form->input('verifiecation_code');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
