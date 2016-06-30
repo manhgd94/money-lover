@@ -171,7 +171,6 @@ class UsersController extends AppController {
 	                $this->redirect('/users/login');
 	                exit;
 	            } else {
-	            	var_dump($tokenhash);die();
 	                $this->Flash->error(__('Your registration failed please try again'));
 	                $this->redirect('/users/login');
 	            }
