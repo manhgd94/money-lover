@@ -1,24 +1,29 @@
-<div class="users form">
-<?php echo $this->Form->create('User', array('type'=>'file')); ?>
-	<fieldset>
-		<legend><?php echo __('Add User'); ?></legend>
-	<?php
-		echo $this->Form->input('name');
-		echo $this->Form->input('username');
-		echo $this->Form->input('password');
-		echo $this->Form->input('email');
-		echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class'=>'avatar-img'));
-		echo $this->Form->input('avatar', array('type'=>'file'));
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Wallets'), array('controller' => 'wallets', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Wallet'), array('controller' => 'wallets', 'action' => 'add')); ?> </li>
-	</ul>
+<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Create account</h3>
+    </div>
+    <div class="panel-body">
+      <?php echo $this->Form->create('User', array('type' => 'file')); ?>
+      <div class="avatar">
+        <?php 
+          echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class'=>'avatar-img'));
+          echo $this->Form->input('avatar', array('label'=>false, 'type'=>'file', 'class'=>'form-control'));
+        ?>
+      </div>
+      <div class="info">
+        <?php
+          echo $this->Form->input('name', array('class'=>'form-control'));
+          echo $this->Form->input('username', array('class'=>'form-control'));
+          echo $this->Form->input('password', array('class'=>'form-control'));
+          echo $this->Form->input('email', array('class'=>'form-control'));
+        ?>
+        <br>
+        <?php
+          echo $this->Form->submit(__('Submit',true), array('class'=>'btn btn-success')); 
+          echo $this->Form->end();
+        ?>
+      </div>
+    </div>
+  </div>
 </div>

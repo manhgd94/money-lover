@@ -10,7 +10,7 @@
 			echo "<p>Đây là thông tin tài khoản của bạn.</p>";
 			echo "<p>Name : ".$name."</p>";
 			echo "<p>Username : ".$username."</p>";
-			echo "<p>Email : ".$name."</p>";
+			echo "<p>Email : ".$email."</p>";
 			echo "<p>Xin hãy click vào link dưới đây để xác nhận tài khoản email của bạn.</p>";
 			echo "<a href='".$message."'>Click here to vefify account</a>"
         ?>

@@ -30,7 +30,7 @@ class User extends AppModel {
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'password' => array(
@@ -58,7 +58,7 @@ class User extends AppModel {
 				'rule' => array('notBlank'),
 				//'message' => 'Your custom message here',
 				// 'allowEmpty' => false,
-				'required' => false,
+				// 'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
@@ -68,7 +68,7 @@ class User extends AppModel {
 				'rule' => array('boolean'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
-				'required' => false,
+				// 'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
@@ -78,7 +78,7 @@ class User extends AppModel {
 				'rule' => array('notBlank'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
-				'required' => false,
+				// 'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
@@ -109,7 +109,7 @@ class User extends AppModel {
 	);
 
 	public function beforeSave($options = array()) {
-		if (!isset($this->data[$this->alias]['password'])) {
+		if (!empty($this->data[$this->alias]['password'])) {
 			$this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
 		} else {
 	        unset($this->data['User']['password']);

@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="pull-left">
 		<?php echo $this->Html->image(
-		    "/theme/Admin/images/rikkei.png",
+		    "/theme/Client/images/logo.jpg",
 		    array("alt" => "logo", "height"=>"40px")
 		);?>
 	</div>

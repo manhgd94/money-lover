@@ -1,17 +1,21 @@
+html{
+  position:relative; 
+  min-height: 100%;
+}
 .header, .content, .footer{
 	width: 100%;
 }
 .content{
-	padding-top: 70px;
+	padding: 70px 0px 60px;
 }
 .footer{
-	position: relative;
+	position: absolute;
 	bottom: 0px;
 	height: 60px;
 	background-color: #f5f5f5;
 }
 .footer .container{
-	padding: 10px 15px 15px 0px;
+	padding: 10px 15px 10px 0px;
 }
 .pull-right{
 	height: 40px;
@@ -44,6 +48,8 @@
 .panel .info{
 	float: left;
 	width: 50%;
+	border-left: 1px solid #337ab7;
+    padding-left: 5%;
 }
 .success{
 	color: #3c763d;
@@ -62,5 +68,5 @@
     border-radius: 4px;
 }
 img.avatar-img{
-	width: 210px;
+	width: 100%;
 }

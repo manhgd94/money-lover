@@ -7,7 +7,10 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  */
 class UsersController extends AppController {
-
+public function beforeFilter() {
+	parent::beforeFilter();
+	$this->Auth->allow('login', 'verify', 'add'); // Letting users register themselves
+}
 /**
  * Components
  *
@@ -127,11 +130,6 @@ class UsersController extends AppController {
 		return $this->redirect(array('action' => 'index'));
 	}
 //login-logout
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$this->Auth->allow('login', 'verify'); // Letting users register themselves
-	}
-
 	public function login() {
 		if ($this->request->is('post') && !empty($this->request->data)) {
 			if ($this->Auth->login()) {
