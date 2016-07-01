@@ -1,27 +1,19 @@
-<div class="wallets view">
-<h2><?php echo __('Wallet'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($wallet['Wallet']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('User'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($wallet['User']['name'], array('controller' => 'users', 'action' => 'view', $wallet['User']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Name'); ?></dt>
-		<dd>
-			<?php echo h($wallet['Wallet']['name']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Current'); ?></dt>
-		<dd>
-			<?php echo h($wallet['Wallet']['current']); ?>
-			&nbsp;
-		</dd>
-	</dl>
+<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Wallet</h3>
+    </div>
+    <div class="panel-body">
+        <?php
+          echo "<label>User</label><br>";
+          echo $this->Html->link($wallet['User']['name'], array('controller' => 'users', 'action' => 'view', $wallet['User']['id']))."<br>";
+          echo "<label>Name</label><br>";
+          echo h($wallet['Wallet']['name'])."<br>";
+          echo "<label>Current</label><br>";
+          echo h($wallet['Wallet']['current'])."<br>";
+        ?>
+    </div>
+  </div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
@@ -73,7 +65,7 @@
 
 	<div class="actions">
 		<ul>
-			<li><?php echo $this->Html->link(__('New Transaction'), array('controller' => 'transactions', 'action' => 'add')); ?> </li>
+			<li><?php echo $this->Html->link(__('New Transaction'), array('controller' => 'transactions', 'action' => 'add', $wallet['Wallet']['id'])); ?> </li>
 		</ul>
 	</div>
 </div>

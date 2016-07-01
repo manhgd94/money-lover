@@ -8,7 +8,7 @@
       <div class="avatar">
         <?php 
           echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class'=>'avatar-img'));
-          echo $this->Form->input('avatar', array('label'=>false, 'type'=>'file', 'class'=>'form-control'));
+          echo $this->Form->input('avatar', array('label'=>false, 'type'=>'file', 'class'=>'form-control', 'required'=>false));
         ?>
       </div>
       <div class="info">

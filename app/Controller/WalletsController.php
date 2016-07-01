@@ -45,9 +45,10 @@ class WalletsController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($id = null) {
 		if ($this->request->is('post')) {
 			$this->Wallet->create();
+			$this->request->data['Wallet']['user_id'] = $id;
 			if ($this->Wallet->save($this->request->data)) {
 				$this->Flash->success(__('The wallet has been saved.'));
 				return $this->redirect(array('action' => 'index'));

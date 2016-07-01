@@ -35,12 +35,12 @@ class User extends AppModel {
 		),
 		'password' => array(
 			'notBlank' => array(
-				'rule' => array('notBlank'),
+				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'email' => array(
@@ -108,12 +108,19 @@ class User extends AppModel {
 		)
 	);
 
+	public function beforeValidate($options = array()) {
+        parent::beforeValidate($options);
+        if($this->data['User']['password'] == ""){
+            unset($this->data['User']['password']);
+        }
+        
+    }
+
+
 	public function beforeSave($options = array()) {
-		if (!empty($this->data[$this->alias]['password'])) {
-			$this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
-		} else {
-	        unset($this->data['User']['password']);
-	    }
-		return true;
-	}
+        if(!empty($this->data['User']['password'])) {
+            $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+        } 
+        return true;
+    }
 }

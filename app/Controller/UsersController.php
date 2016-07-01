@@ -51,7 +51,6 @@ public function beforeFilter() {
 	public function add() {
 		if ($this->request->is('post')) {
 			$filename = $_SERVER['DOCUMENT_ROOT']."/cakephp/money-lover/app/webroot/img/".$this->data['User']['avatar']['name'];
-			$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
 	        $hash = sha1($this->request->data['User']['username'] . rand(0, 100));
 	        $this->request->data['User']['verifiecation_code'] = $hash;
 			$this->User->create();

@@ -1,15 +1,23 @@
-<div class="wallets form">
-<?php echo $this->Form->create('Wallet'); ?>
-	<fieldset>
-		<legend><?php echo __('Edit Wallet'); ?></legend>
+<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Edit wallet</h3>
+    </div>
+    <div class="panel-body">
+      <?php echo $this->Form->create('Wallet'); ?>
 	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('user_id');
-		echo $this->Form->input('name');
-		echo $this->Form->input('current');
+		echo $this->Form->input('id', array('class'=>'form-control'));
+		echo $this->Form->input('user_id', array('class'=>'form-control'));
+		echo $this->Form->input('name', array('class'=>'form-control'));
+		echo $this->Form->input('current', array('class'=>'form-control'));
 	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+    <br>
+    <?php
+      echo $this->Form->submit(__('Create',true), array('class'=>'btn btn-success')); 
+      echo $this->Form->end();
+    ?>
+    </div>
+  </div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

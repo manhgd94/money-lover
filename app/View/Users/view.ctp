@@ -1,7 +1,7 @@
 <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title">Create account</h3>
+      <h3 class="panel-title">User</h3>
     </div>
     <div class="panel-body">
       <div class="avatar">
@@ -53,7 +53,7 @@
 
 	<div class="actions">
 		<ul>
-			<li><?php echo $this->Html->link(__('New Wallet'), array('controller' => 'wallets', 'action' => 'add')); ?> </li>
+			<li><?php echo $this->Html->link(__('New Wallet'), array('controller' => 'wallets', 'action' => 'add', $user['User']['id'])); ?> </li>
 		</ul>
 	</div>
 </div>

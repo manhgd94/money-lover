@@ -1,27 +1,19 @@
-<div class="categories view">
-<h2><?php echo __('Category'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($category['Category']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Pid'); ?></dt>
-		<dd>
-			<?php echo h($category['Category']['pid']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Name'); ?></dt>
-		<dd>
-			<?php echo h($category['Category']['name']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Type'); ?></dt>
-		<dd>
-			<?php echo h($category['Category']['type']); ?>
-			&nbsp;
-		</dd>
-	</dl>
+<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Category</h3>
+    </div>
+    <div class="panel-body">
+        <?php
+          echo "<label>Pid</label><br>";
+          echo h($category['Category']['pid'])."<br>";
+          echo "<label>Name</label><br>";
+          echo h($category['Category']['name'])."<br>";
+          echo "<label>Type</label><br>";
+          echo h($category['Category']['type'])."<br>";
+        ?>
+    </div>
+  </div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

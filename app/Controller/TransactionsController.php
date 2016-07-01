@@ -45,9 +45,10 @@ class TransactionsController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($id = null) {
 		if ($this->request->is('post')) {
 			$this->Transaction->create();
+			$this->request->data['Transaction']['wallet_id'] = $id;
 			if ($this->Transaction->save($this->request->data)) {
 				$this->Flash->success(__('The transaction has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -55,7 +56,7 @@ class TransactionsController extends AppController {
 				$this->Flash->error(__('The transaction could not be saved. Please, try again.'));
 			}
 		}
-		$wallets = $this->Transaction->Wallet->find('list');
+		// $wallets = $this->Transaction->Wallet->find('list');
 		$categories = $this->Transaction->Category->find('list');
 		$this->set(compact('wallets', 'categories'));
 	}
