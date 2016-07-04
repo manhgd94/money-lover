@@ -1,6 +1,6 @@
 <div class="transactions index">
 	<h2><?php echo __('Transactions'); ?></h2>
-	<table cellpadding="0" cellspacing="0" class="table table-striped">
+	<table cellpadding="0" cellspacing="0" class="table table-striped table-hover">
 	<thead>
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>

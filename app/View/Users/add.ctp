@@ -20,7 +20,7 @@
         ?>
         <br>
         <?php
-          echo $this->Form->submit(__('Submit',true), array('class'=>'btn btn-success')); 
+          echo $this->Form->submit(__('Create',true), array('class'=>'btn btn-success')); 
           echo $this->Form->end();
         ?>
       </div>

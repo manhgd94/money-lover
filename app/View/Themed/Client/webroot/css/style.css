@@ -70,3 +70,6 @@ html{
 img.avatar-img{
 	width: 100%;
 }
+.clearfix{
+	text-align: right;
+}
