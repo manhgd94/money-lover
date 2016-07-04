@@ -141,6 +141,7 @@ public function beforeFilter() {
 			        $this->redirect(array('controller'=>'users','action' => 'index'));
 			    }
 			} else {
+				$this->Flash->error(__('Username or password is incorrect.'));
 				$this->logout();
 			}
 		}
@@ -256,7 +257,7 @@ public function beforeFilter() {
 					$this->User->data['User']['username']=$u['User']['username'];
 					$new_hash=sha1($u['User']['username'].rand(0,100));//created token
 					$this->User->data['User']['tokenhash']=$new_hash;
-					if($this->User->validates(array('fieldList'=>array('password','password_confirm')))){
+					if($this->data['User']['password'] === $this->data['User']['password_confirm']){
 						if($this->User->save($this->User->data))
 						{
 							$this->Flash->success(__('Password Has been Updated'));
@@ -265,8 +266,7 @@ public function beforeFilter() {
 
 					}
 					else{
-
-						$this->set('errors',$this->User->invalidFields());
+						$this->Flash->error(__('Password and Password confirm is different.'));
 					}
 				}
 			}
