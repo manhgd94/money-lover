@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController {
 public function beforeFilter() {
 	parent::beforeFilter();
-	$this->Auth->allow('login', 'verify', 'add'); // Letting users register themselves
+	$this->Auth->allow('login', 'verify', 'add', 'forgetpwd', 'reset'); // Letting users register themselves
 }
 /**
  * Components
@@ -52,7 +52,7 @@ public function beforeFilter() {
 		if ($this->request->is('post')) {
 			$filename = $_SERVER['DOCUMENT_ROOT']."/cakephp/money-lover/app/webroot/img/".$this->data['User']['avatar']['name'];
 	        $hash = sha1($this->request->data['User']['username'] . rand(0, 100));
-	        $this->request->data['User']['verifiecation_code'] = $hash;
+	        $this->request->data['User']['tokenhash'] = $hash;
 			$this->User->create();
 			if (move_uploaded_file($this->data['User']['avatar']['tmp_name'],$filename)) {
 				$this->request->data['User']['avatar'] = $this->data['User']['avatar']['name'];
@@ -69,7 +69,7 @@ public function beforeFilter() {
 						));
 					$email->from(array('manhgd94@gmail.com' => 'Money lover'));
 					$email->to($this->request->data['User']['email']);
-					$email->subject('Email tu app moneylover');        
+					$email->subject(' successfully created an Money lover account');        
 					$email->send();
 					$this->Flash->success(__('The user has been saved.'));
 					return $this->redirect(array('action' => 'index'));
@@ -132,11 +132,11 @@ public function beforeFilter() {
 	public function login() {
 		if ($this->request->is('post') && !empty($this->request->data)) {
 			if ($this->Auth->login()) {
-				if ($this->Auth->user('verified') == 0) {
+				if ($this->Auth->user('active') == 0) {
 			        // User has not confirmed account
 			        $this->Flash->error(__('Your account has not been activated. Please check your email.'));
                     $this->redirect(array('controller'=>'users','action' => 'login'));
-			    } elseif ($this->Auth->user('verified') == 1) {
+			    } elseif ($this->Auth->user('active') == 1) {
 			        // User is active
 			        $this->redirect(array('controller'=>'users','action' => 'index'));
 			    }
@@ -158,10 +158,10 @@ public function beforeFilter() {
 	        $name = $this->passedArgs['n'];
 	        $tokenhash = $this->passedArgs['t'];
 	        $results = $this->User->findByUsername($name);
-	        if ($results['User']['verified']==0){
+	        if ($results['User']['active']==0){
 	            //check the token
-	            if ($results['User']['verifiecation_code']==$tokenhash){
-	                $results['User']['verified']=1;
+	            if ($results['User']['tokenhash']==$tokenhash){
+	                $results['User']['active']=1;
 	                //Save the data
 	                $this->User->save($results);
 	                $this->Flash->success(__('Your registration is complete'));
@@ -179,5 +179,105 @@ public function beforeFilter() {
 	        $this->Flash->error(__('Token corrupted. Please re-register'));
 	        $this->redirect('/users/login');
 	    }
+	}
+//forgot password
+	function forgetpwd(){
+		//$this->layout="signup";
+		$this->User->recursive=-1;
+		if(!empty($this->data))
+		{
+			if(empty($this->data['User']['email']))
+			{
+				$this->Flash->error(__('Please Provide Your Email Adress that You used to Register with Us'));
+			}
+			else
+			{
+				$email=$this->data['User']['email'];
+				$fu=$this->User->find('first',array('conditions'=>array('User.email'=>$email)));
+				if($fu)
+				{
+					//debug($fu);
+					if($fu['User']['active'])
+					{
+						$key = Security::hash(CakeText::uuid(),'sha512',true);
+						$hash=sha1($fu['User']['username'].rand(0,100));
+						$url = Router::url( array('controller'=>'users','action'=>'reset'), true ).'/'.$key.'#'.$hash;
+						$ms=$url;
+						$ms=wordwrap($ms,1000);
+						//debug($url);
+						$fu['User']['tokenhash']=$key;
+						$this->User->id=$fu['User']['id'];
+						if($this->User->saveField('tokenhash',$fu['User']['tokenhash'])){
+
+							//============Email================//
+							App::uses('CakeEmail', 'Network/Email');
+		            		$email = new CakeEmail('smtp');
+							$email->template('resetpw');
+							$email->emailFormat('html');
+							$email->viewVars(array('ms' => $ms,
+									'name'=>$fu['User']['name'],
+									'username'=>$fu['User']['username'],
+									'email'=>$fu['User']['email']
+								));
+							$email->from(array('manhgd94@gmail.com' => 'Money lover'));
+							$email->to($fu['User']['email']);
+							$email->subject('Reset Password Money lover');        
+							$email->send();
+							//============EndEmail=============//
+							$this->Flash->success(__('Check Your Email To Reset your password', true));
+							$this->redirect('/users/login');
+						}
+						else{
+							$this->Flash->error(__("Error Generating Reset link"));
+						}
+					}
+					else
+					{
+						$this->Flash->error(__('This Account is not Active yet.Check Your mail to activate it'));
+					}
+				}
+				else
+				{
+					$this->Flash->error(__('Email does Not Exist'));
+				}
+			}
+		}
+	}
+
+	function reset($token=null){
+		//$this->layout="Login";
+		$this->User->recursive=-1;
+		if(!empty($token)){
+			$u=$this->User->findBytokenhash($token);
+			if($u){
+				$this->User->id=$u['User']['id'];
+				if(!empty($this->data)){
+					$this->User->data=$this->data;
+					$this->User->data['User']['username']=$u['User']['username'];
+					$new_hash=sha1($u['User']['username'].rand(0,100));//created token
+					$this->User->data['User']['tokenhash']=$new_hash;
+					if($this->User->validates(array('fieldList'=>array('password','password_confirm')))){
+						if($this->User->save($this->User->data))
+						{
+							$this->Flash->success(__('Password Has been Updated'));
+							$this->redirect(array('controller'=>'users','action'=>'login'));
+						}
+
+					}
+					else{
+
+						$this->set('errors',$this->User->invalidFields());
+					}
+				}
+			}
+			else
+			{
+				$this->Flash->error(__('Token Corrupted. Please Retry the reset link work only for once.'));
+			}
+		}
+
+		else{
+			$this->redirect('/');
+		}
 	}
 }

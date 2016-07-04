@@ -10,41 +10,11 @@
   <div class="clearfix">
     <?php echo $this->Form->submit('Đăng nhập',array('class'=>'btn btn-lg btn-primary btn-block')); ?>
     <div>
-      <?php echo $this->Html->link('Create an account', array('controller'=>'users', 'action'=>'add')) ?>
-      <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#myModal">Forgot password</button>
+      <?php
+        echo $this->Html->link('Create an account', array('controller'=>'users', 'action'=>'add'));
+        echo "<span class='space'>|</span>";
+        echo $this->Html->link('Forgot password', array('controller'=>'users', 'action'=>'forgetpwd')); ?>
     </div>
     <?php echo $this->Form->end();?>
-  </div>
-  <!-- Modal -->
-  <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-  
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Forgot password</h4>
-        </div>
-        <div class="modal-body">
-          <?php echo $this->Form->create(false, array(
-                    'url' => array('controller' => 'users', 'action' => 'forgotpassword'),
-                    'id' => 'forgotpassword'
-                ));
-          ?>
-          <?php
-          // echo $this->Form->input('wallet_id');
-            echo $this->Form->input('email', array('class'=>'form-control'));
-          ?>
-        </div>
-        <div class="modal-footer">
-          <?php
-            echo $this->Form->submit(__('Send',true), array('class'=>'btn btn-info', 'div'=>false)); 
-            echo $this->Form->end();
-          ?>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-  
-    </div>
   </div>
 </div>
