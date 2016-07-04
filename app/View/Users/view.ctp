@@ -29,18 +29,16 @@
 	<?php if (!empty($user['Wallet'])): ?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('User Id'); ?></th>
 		<th><?php echo __('Name'); ?></th>
 		<th><?php echo __('Current'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($user['Wallet'] as $wallet): ?>
 		<tr>
-			<td><?php echo $wallet['id']; ?></td>
-			<td><?php echo $wallet['user_id']; ?></td>
 			<td><?php echo $wallet['name']; ?></td>
-			<td><?php echo $wallet['current']; ?></td>
+			<td><?php if (h($wallet['current'])==true): ?>
+				<span class="glyphicon glyphicon-ok"></span>
+			<?php endif ?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'wallets', 'action' => 'view', $wallet['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'wallets', 'action' => 'edit', $wallet['id'])); ?>
