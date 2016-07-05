@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <?php echo $this->Html->link('Money lover',array('controller'=>'wallets', 'action'=>'index'), array('class'=>'navbar-brand')) ?>
+      <?php echo $this->Html->link('Money lover',array('controller'=>'home', 'action'=>'index'), array('class'=>'navbar-brand')) ?>
     </div>
     <ul class="nav navbar-nav">
     <li><?php echo $this->Html->link('Categories',array('controller'=>'categories', 'action'=>'index')) ?></li>

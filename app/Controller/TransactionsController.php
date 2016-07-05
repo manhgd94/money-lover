@@ -74,6 +74,26 @@ class TransactionsController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Transaction->save($this->request->data)) {
+
+				$this->Transaction->virtualFields['total'] = 'SUM(Transaction.money)';
+				$conditions = array('Category.type'=>true, 'Transaction.wallet_id'=>$this->request->data['Transaction']['wallet_id']);
+				$total = $this->Transaction->find('all', array(
+					'fields' => array('total'),
+					'conditions' => $conditions,
+					));
+				$expense = $total[0]['Transaction']['total'];
+
+				$conditions = array('Category.type'=>false, 'Transaction.wallet_id'=>$this->request->data['Transaction']['wallet_id']);
+				$total = $this->Transaction->find('all', array(
+					'fields' => array('total'),
+					'conditions' => $conditions,
+					));
+				$income = $total[0]['Transaction']['total'];
+				$this->loadmodel('Wallet');
+				$this->Wallet->id = $this->request->data['Transaction']['wallet_id'];
+				$this->Wallet->saveField('expense', $expense);
+				$this->Wallet->saveField('income', $income);
+
 				$this->Flash->success(__('The transaction has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
