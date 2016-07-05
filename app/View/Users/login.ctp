@@ -13,7 +13,7 @@
       <?php
         echo $this->Html->link('Create an account', array('controller'=>'users', 'action'=>'add'));
         echo "<span class='space'>|</span>";
-        echo $this->Html->link('Forgot password', array('controller'=>'users', 'action'=>'forgetpwd')); ?>
+        echo $this->Html->link('Forgot password',   array('controller'=>'users', 'action'=>'forgetpwd')); ?>
     </div>
     <?php echo $this->Form->end();?>
   </div>

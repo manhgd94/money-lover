@@ -1,6 +1,6 @@
 <div class="panel-group" id="accordion">
   <?php foreach ($wallets as $wl): ?>
-    <div class="panel panel-default <?php if ($wl['Wallet']['current']==true) echo "panel-primary"?>">
+    <div class="panel panel-default <?php if ($wl['Wallet']['current'] == true) echo "panel-primary"?>">
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $wl['Wallet']['id']; ?>">
@@ -21,7 +21,7 @@
               <th>created</th>
             </tr>
             <?php foreach ($transactions as $trs): ?>
-              <?php if ($wl['Wallet']['id']==$trs['Transaction']['wallet_id']): ?>
+              <?php if ($wl['Wallet']['id'] == $trs['Transaction']['wallet_id']): ?>
                 <tr>
                   <td><?php echo $trs['Category']['name']; ?></td>
                   <td><?php echo $trs['Transaction']['name']; ?></td>

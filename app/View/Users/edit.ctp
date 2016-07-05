@@ -13,11 +13,11 @@
       </div>
       <div class="info">
         <?php
-          echo $this->Form->input('id', array('class'=>'form-control'));
-          echo $this->Form->input('name', array('class'=>'form-control'));
+          echo $this->Form->input('id',       array('class'=>'form-control'));
+          echo $this->Form->input('name',     array('class'=>'form-control'));
           echo $this->Form->input('username', array('class'=>'form-control'));
           echo $this->Form->input('password', array('class'=>'form-control', 'value' => '','autocomplete'=>'off', 'required'=>false));
-          echo $this->Form->input('email', array('class'=>'form-control'));
+          echo $this->Form->input('email',    array('class'=>'form-control'));
         ?>
         <br>
         <?php
