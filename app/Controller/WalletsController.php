@@ -49,6 +49,8 @@ class WalletsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Wallet->create();
 			$this->request->data['Wallet']['user_id'] = $id;
+			$this->request->data['Wallet']['income'] = 0;
+			$this->request->data['Wallet']['expense'] = 0;
 			if ($this->Wallet->save($this->request->data)) {
 				if ($this->request->data['Wallet']['current']==true) {
 					$this->Wallet->updateAll(

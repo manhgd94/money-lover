@@ -11,6 +11,10 @@
           echo h($wallet['Wallet']['name'])."<br>";
           echo "<label>Current</label><br>";
           echo h($wallet['Wallet']['current'])."<br>";
+          echo "<label>Expense</label><br>";
+          echo h($wallet['Wallet']['expense'])."<br>";
+          echo "<label>Income</label><br>";
+          echo h($wallet['Wallet']['income'])."<br>";
         ?>
     </div>
   </div>
