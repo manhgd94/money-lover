@@ -26,8 +26,8 @@ class Wallet extends AppModel {
 		),
 		'name' => array(
 			'notBlank' => array(
-				'rule' => array('notBlank'),
-				//'message' => 'Your custom message here',
+				"rule"=>array("checkUnique", array("name", "user_id")),
+				'message' => 'The name has already been taken',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -83,5 +83,16 @@ class Wallet extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+	function checkUnique($data, $fields) {
+        if (!is_array($fields)) { 
+            $fields = array($fields); 
+        } foreach($fields as $key) { 
+            $tmp[$key] = $this->data[$this->name][$key]; 
+        } if (isset($this->data[$this->name][$this->primaryKey])) {
+            $tmp[$this->primaryKey] = "<>".$this->data[$this->name][$this->primaryKey]; 
+        }
+        return $this->isUnique($tmp, false); 
+    }
 
 }

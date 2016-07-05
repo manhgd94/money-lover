@@ -50,6 +50,12 @@ class WalletsController extends AppController {
 			$this->Wallet->create();
 			$this->request->data['Wallet']['user_id'] = $id;
 			if ($this->Wallet->save($this->request->data)) {
+				if ($this->request->data['Wallet']['current']==true) {
+					$this->Wallet->updateAll(
+						array('Wallet.current'=>0),
+						array('Wallet.id !='=>$this->Wallet->id, 'Wallet.user_id'=>$id)
+					);
+				}
 				$this->Flash->success(__('The wallet has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
@@ -72,7 +78,14 @@ class WalletsController extends AppController {
 			throw new NotFoundException(__('Invalid wallet'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+			$user_id = $this->request->data['Wallet']['user_id'];
 			if ($this->Wallet->save($this->request->data)) {
+				if ($this->request->data['Wallet']['current']==true) {
+					$this->Wallet->updateAll(
+						array('Wallet.current'=>0),
+						array('Wallet.id !='=>$this->Wallet->id, 'Wallet.user_id'=>$user_id)
+					);
+				}
 				$this->Flash->success(__('The wallet has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {

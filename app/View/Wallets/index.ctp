@@ -18,7 +18,9 @@
 			<?php echo $this->Html->link($wallet['User']['name'], array('controller' => 'users', 'action' => 'view', $wallet['User']['id'])); ?>
 		</td>
 		<td><?php echo h($wallet['Wallet']['name']); ?>&nbsp;</td>
-		<td><?php echo h($wallet['Wallet']['current']); ?>&nbsp;</td>
+		<td><?php if (h($wallet['Wallet']['current'])==true): ?>
+			<span class="glyphicon glyphicon-ok"></span>
+		<?php endif ?></td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $wallet['Wallet']['id']), array('class'=>'button btn btn-info')); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $wallet['Wallet']['id']), array('class'=>'button btn btn-success')); ?>
