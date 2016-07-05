@@ -26,7 +26,7 @@ class Wallet extends AppModel {
 		),
 		'name' => array(
 			'notBlank' => array(
-				"rule"=>array("checkUnique", array("name", "user_id")),
+				"rule"    =>array("checkUnique", array("name", "user_id")),
 				'message' => 'The name has already been taken',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -55,11 +55,11 @@ class Wallet extends AppModel {
  */
 	public $belongsTo = array(
 		'User' => array(
-			'className' => 'User',
+			'className'  => 'User',
 			'foreignKey' => 'user_id',
 			'conditions' => '',
-			'fields' => '',
-			'order' => ''
+			'fields'     => '',
+			'order'      => ''
 		)
 	);
 
@@ -70,16 +70,16 @@ class Wallet extends AppModel {
  */
 	public $hasMany = array(
 		'Transaction' => array(
-			'className' => 'Transaction',
-			'foreignKey' => 'wallet_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
+			'className'    => 'Transaction',
+			'foreignKey'   => 'wallet_id',
+			'dependent'    => false,
+			'conditions'   => '',
+			'fields'       => '',
+			'order'        => '',
+			'limit'        => '',
+			'offset'       => '',
+			'exclusive'    => '',
+			'finderQuery'  => '',
 			'counterQuery' => ''
 		)
 	);
@@ -87,7 +87,7 @@ class Wallet extends AppModel {
 	function checkUnique($data, $fields) {
         if (!is_array($fields)) { 
             $fields = array($fields); 
-        } foreach($fields as $key) { 
+        } foreach ($fields as $key) { 
             $tmp[$key] = $this->data[$this->name][$key]; 
         } if (isset($this->data[$this->name][$this->primaryKey])) {
             $tmp[$this->primaryKey] = "<>".$this->data[$this->name][$this->primaryKey]; 
