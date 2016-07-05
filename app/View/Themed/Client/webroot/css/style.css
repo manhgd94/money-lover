@@ -83,3 +83,7 @@ img.avatar-img{
 .thu, .chi{
 	width: 50%;
 }
+.total-money{
+	float: right;
+	margin: 0px 10px;
+}

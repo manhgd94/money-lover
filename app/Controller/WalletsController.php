@@ -22,6 +22,10 @@ class WalletsController extends AppController {
  */
 	public function index() {
 		$this->Wallet->recursive = 0;
+		$conditions = array('Wallet.user_id'=>$this->Auth->user('id'));
+		$this->Paginator->settings = array(
+            'conditions' => $conditions,
+        );
 		$this->set('wallets', $this->Paginator->paginate());
 	}
 
@@ -45,10 +49,10 @@ class WalletsController extends AppController {
  *
  * @return void
  */
-	public function add($id = null) {
+	public function add() {
 		if ($this->request->is('post')) {
 			$this->Wallet->create();
-			$this->request->data['Wallet']['user_id'] = $id;
+			$this->request->data['Wallet']['user_id'] = $this->Auth->user('id');
 			$this->request->data['Wallet']['income'] = 0;
 			$this->request->data['Wallet']['expense'] = 0;
 			if ($this->Wallet->save($this->request->data)) {

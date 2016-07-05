@@ -22,6 +22,10 @@ class TransactionsController extends AppController {
  */
 	public function index() {
 		$this->Transaction->recursive = 0;
+		$conditions = array('Wallet.user_id'=>$this->Auth->user('id'), 'Wallet.current'=>true);
+		$this->Paginator->settings = array(
+            'conditions' => $conditions,
+        );
 		$this->set('transactions', $this->Paginator->paginate());
 	}
 
@@ -50,6 +54,32 @@ class TransactionsController extends AppController {
 			$this->Transaction->create();
 			$this->request->data['Transaction']['wallet_id'] = $id;
 			if ($this->Transaction->save($this->request->data)) {
+
+				$this->Transaction->virtualFields['total'] = 'SUM(Transaction.money)';
+				$conditions = array('Category.type'=>true, 'Transaction.wallet_id'=>$this->request->data['Transaction']['wallet_id']);
+				$total = $this->Transaction->find('all', array(
+					'fields' => array('total'),
+					'conditions' => $conditions,
+					));
+				if ($total[0]['Transaction']['total']==null) {
+					$total[0]['Transaction']['total']=0;
+				}
+				$expense = $total[0]['Transaction']['total'];
+
+				$conditions = array('Category.type'=>false, 'Transaction.wallet_id'=>$this->request->data['Transaction']['wallet_id']);
+				$total = $this->Transaction->find('all', array(
+					'fields' => array('total'),
+					'conditions' => $conditions,
+					));
+				if ($total[0]['Transaction']['total']==null) {
+					$total[0]['Transaction']['total']=0;
+				}
+				$income = $total[0]['Transaction']['total'];
+				$this->loadmodel('Wallet');
+				$this->Wallet->id = $this->request->data['Transaction']['wallet_id'];
+				$this->Wallet->saveField('expense', $expense);
+				$this->Wallet->saveField('income', $income);
+
 				$this->Flash->success(__('The transaction has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
@@ -76,11 +106,15 @@ class TransactionsController extends AppController {
 			if ($this->Transaction->save($this->request->data)) {
 
 				$this->Transaction->virtualFields['total'] = 'SUM(Transaction.money)';
+
 				$conditions = array('Category.type'=>true, 'Transaction.wallet_id'=>$this->request->data['Transaction']['wallet_id']);
 				$total = $this->Transaction->find('all', array(
 					'fields' => array('total'),
 					'conditions' => $conditions,
 					));
+				if ($total[0]['Transaction']['total']==null) {
+					$total[0]['Transaction']['total']=0;
+				}
 				$expense = $total[0]['Transaction']['total'];
 
 				$conditions = array('Category.type'=>false, 'Transaction.wallet_id'=>$this->request->data['Transaction']['wallet_id']);
@@ -88,6 +122,9 @@ class TransactionsController extends AppController {
 					'fields' => array('total'),
 					'conditions' => $conditions,
 					));
+				if ($total[0]['Transaction']['total']==null) {
+					$total[0]['Transaction']['total']=0;
+				}
 				$income = $total[0]['Transaction']['total'];
 				$this->loadmodel('Wallet');
 				$this->Wallet->id = $this->request->data['Transaction']['wallet_id'];

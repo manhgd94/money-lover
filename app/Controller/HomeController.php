@@ -31,15 +31,15 @@ App::uses('AppController', 'Controller');
 class HomeController extends AppController {
 	public function index() {
 		$this->loadmodel('Wallet');
-		$userlogin = $this->Auth->user();
-		$conditions = array('user_id'=>$userlogin['id']);
+		$userlogin = $this->Auth->user('id');
+		$conditions = array('user_id'=>$userlogin);
 		$this->Wallet->recursive = -1;
 		$wallets = $this->Wallet->find('all', array(
 			'conditions' => $conditions,
 			));
 
 		$this->loadmodel('Transaction');
-		$conditions = array('Wallet.user_id'=>$userlogin['id']);
+		$conditions = array('Wallet.user_id'=>$userlogin);
 		$trans = $this->Transaction->find('all', array(
 			'conditions' => $conditions,
 			));
