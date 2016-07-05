@@ -27,24 +27,24 @@ App::uses('AuthComponent', 'Controller/Component');
  * Add your application-wide methods in the class below, your controllers
  * will inherit them.
  *
- * @package		app.Controller
- * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
+ * @package        app.Controller
+ * @link        http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-	var $theme = "Client";
-	var $layout = "index";
-	public $components = array(
-		'RequestHandler',
-		'Session',
-		'Cookie',
-		'Flash',
-		'Auth' => array(
-			'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
-			'logoutRedirect' => array('controller' => 'users', 'action' => 'login')
-		)
-	);
-	public function beforeFilter(){
-		$this->Auth->allow("users/login");
-		$this->set('userlogin',$this->Auth->user());
-	}
+    var $theme  = "Client";
+    var $layout = "index";
+    public $components = array(
+        'RequestHandler',
+        'Session',
+        'Cookie',
+        'Flash',
+        'Auth' => array(
+            'loginRedirect'  => array('controller' => 'users', 'action' => 'index'),
+            'logoutRedirect' => array('controller' => 'users', 'action' => 'login')
+        )
+    );
+    public function beforeFilter(){
+        $this->Auth->allow("users/login");
+        $this->set('userlogin',$this->Auth->user());
+    }
 }

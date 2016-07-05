@@ -29,22 +29,22 @@ App::uses('AppController', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
 class HomeController extends AppController {
-	public function index() {
-		$this->loadmodel('Wallet');
-		$userlogin = $this->Auth->user('id');
-		$conditions = array('user_id'=>$userlogin);
-		$this->Wallet->recursive = -1;
-		$wallets = $this->Wallet->find('all', array(
-			'conditions' => $conditions,
-			));
+    public function index() {
+        $this->loadmodel('Wallet');
+        $userlogin  = $this->Auth->user('id');
+        $conditions = array('user_id' => $userlogin);
+        $this->Wallet->recursive = -1;
+        $wallets = $this->Wallet->find('all', array(
+            'conditions' => $conditions,
+            ));
 
-		$this->loadmodel('Transaction');
-		$conditions = array('Wallet.user_id'=>$userlogin);
-		$trans = $this->Transaction->find('all', array(
-			'conditions' => $conditions,
-			));
+        $this->loadmodel('Transaction');
+        $conditions = array('Wallet.user_id' => $userlogin);
+        $trans      = $this->Transaction->find('all', array(
+            'conditions' => $conditions,
+            ));
 
-		$this->set('transactions', $trans);
+        $this->set('transactions', $trans);
         $this->set('wallets', $wallets);
-	}
+    }
 }
