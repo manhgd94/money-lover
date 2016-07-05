@@ -77,3 +77,9 @@ img.avatar-img{
 	margin: 0px 5px;
 	color: rgba(51,122,183,0.60);
 }
+.cat-sub{
+	padding-left: 30px;
+}
+.thu, .chi{
+	width: 50%;
+}
