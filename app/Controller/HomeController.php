@@ -29,6 +29,11 @@ App::uses('AppController', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
 class HomeController extends AppController {
+    public function beforeFilter(){
+        parent::beforeFilter();
+        $this->set('active','home');
+    }
+
     public function index() {
         $this->loadmodel('Wallet');
         $userlogin  = $this->Auth->user('id');

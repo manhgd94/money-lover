@@ -7,7 +7,10 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  */
 class TransactionsController extends AppController {
-
+public function beforeFilter(){
+    parent::beforeFilter();
+    $this->set('active','transaction');
+}
 /**
  * Components
  *
@@ -52,7 +55,7 @@ class TransactionsController extends AppController {
     public function add($id = null) {
         if ($this->request->is('post')) {
             $this->Transaction->create();
-            $this->request->data['Transaction']['wallet_id'] = $id;
+            // $this->request->data['Transaction']['wallet_id'] = $id;
             if ($this->Transaction->save($this->request->data)) {
 
                 $this->Transaction->virtualFields['total'] = 'SUM(Transaction.money)';
@@ -86,7 +89,8 @@ class TransactionsController extends AppController {
                 $this->Flash->error(__('The transaction could not be saved. Please, try again.'));
             }
         }
-        // $wallets = $this->Transaction->Wallet->find('list');
+        $cond = array('conditions' => array('Wallet.user_id' => $this->Auth->user('id')));
+        $wallets = $this->Transaction->Wallet->find('list', $cond);
         $categories = $this->Transaction->Category->find('list');
         $this->set(compact('wallets', 'categories'));
     }
@@ -140,7 +144,8 @@ class TransactionsController extends AppController {
             $options = array('conditions' => array('Transaction.' . $this->Transaction->primaryKey => $id));
             $this->request->data = $this->Transaction->find('first', $options);
         }
-        $wallets = $this->Transaction->Wallet->find('list');
+        $cond = array('conditions' => array('Wallet.user_id' => $this->Auth->user('id')));
+        $wallets = $this->Transaction->Wallet->find('list', $cond);
         $categories = $this->Transaction->Category->find('list');
         $this->set(compact('wallets', 'categories'));
     }

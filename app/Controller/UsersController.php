@@ -10,6 +10,7 @@ class UsersController extends AppController {
 public function beforeFilter() {
     parent::beforeFilter();
     $this->Auth->allow('login', 'verify', 'add', 'forgetpwd', 'reset'); // Letting users register themselves
+    $this->set('active','user');
 }
 /**
  * Components
@@ -57,20 +58,22 @@ public function beforeFilter() {
             if (move_uploaded_file($this->data['User']['avatar']['tmp_name'],$filename)) {
                 $this->request->data['User']['avatar'] = $this->data['User']['avatar']['name'];
                 if ($this->User->save($this->request->data)) {
+                    //============Email================//
                     App::uses('CakeEmail', 'Network/Email');
                     $ms    = 'http://localhost/cakephp/money-lover/users/verify/t:' . $hash . '/n:' . $this->data['User']['username'] . '';
                     $email = new CakeEmail('smtp');
                     $email->template('clientsreport', 'clientsreport');
                     $email->emailFormat('html');
                     $email->viewVars(array('message' => $ms,
-                            'name' => $this->request->data['User']['name'],
+                            'name'     => $this->request->data['User']['name'],
                             'username' => $this->request->data['User']['username'],
-                            'email' => $this->request->data['User']['email']
+                            'email'    => $this->request->data['User']['email']
                         ));
                     $email->from(array('manhgd94@gmail.com' => 'Money lover'));
                     $email->to($this->request->data['User']['email']);
                     $email->subject(' successfully created an Money lover account');
                     $email->send();
+                    //============EndEmail================//
                     $this->Flash->success(__('The user has been saved.'));
                     return $this->redirect(array('action' => 'index'));
                 } else {
@@ -146,6 +149,7 @@ public function beforeFilter() {
                 $this->logout();
             }
         }
+        $this->set('active','login');
     }
     public function logout() {
         if ($this->Auth->logout()) {

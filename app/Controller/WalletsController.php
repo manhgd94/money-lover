@@ -7,7 +7,10 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  */
 class WalletsController extends AppController {
-
+public function beforeFilter(){
+    parent::beforeFilter();
+    $this->set('active','wallet');
+}
 /**
  * Components
  *
@@ -83,6 +86,7 @@ class WalletsController extends AppController {
         if (!$this->Wallet->exists($id)) {
             throw new NotFoundException(__('Invalid wallet'));
         }
+        $this->request->data['Wallet']['user_id'] = $this->Auth->user('id');
         if ($this->request->is(array('post', 'put'))) {
             $user_id = $this->request->data['Wallet']['user_id'];
             if ($this->Wallet->save($this->request->data)) {

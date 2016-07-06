@@ -6,6 +6,7 @@
     <div class="panel-body">
       <?php echo $this->Form->create('Transaction'); ?>
   <?php
+    echo $this->Form->input('wallet_id',   array('class'=>'form-control'));
     echo $this->Form->input('category_id', array('class'=>'form-control'));
     echo $this->Form->input('name',        array('class'=>'form-control'));
     echo $this->Form->input('note',        array('class'=>'form-control'));

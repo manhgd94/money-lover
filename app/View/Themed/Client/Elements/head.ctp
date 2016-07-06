@@ -9,4 +9,4 @@ echo $this->Html->css('style', array('media'=>'screen'));
 echo $this->Html->script('jquery.min');
 echo $this->Html->script('bootstrap.min');
 ?>
-<title>Employee</title> 
+<title>Money lover</title> 

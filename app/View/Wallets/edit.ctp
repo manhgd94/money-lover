@@ -7,7 +7,6 @@
     <?php
       echo $this->Form->create('Wallet');
       echo $this->Form->input('id', array('class'=>'form-control'));
-      echo $this->Form->input('user_id', array('class'=>'form-control'));
       echo $this->Form->input('name', array('class'=>'form-control'));
       echo $this->Form->input('current', array('class'=>'form-control'));
     ?>
