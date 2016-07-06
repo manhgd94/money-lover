@@ -25,7 +25,30 @@ public function beforeFilter(){
  */
     public function index() {
         $this->Transaction->recursive = 0;
-        $conditions = array('Wallet.user_id' => $this->Auth->user('id'), 'Wallet.current' => true);
+        $conditions = [];
+        if ($this->request->query) {
+            $search_name  = $this->request->query['name'];
+            $search_year  = $this->request->query['time']['year'];
+            $search_month = $this->request->query['time']['month'];
+            $search_day   = $this->request->query['time']['day'];
+            if ($search_name) {
+                $conditions['Transaction.name LIKE']     = '%'.$search_name.'%';
+            }
+            if ($search_year) {
+                $conditions['YEAR(Transaction.created)']  = $search_year;
+            }
+            if ($search_month) {
+                $conditions['MONTH(Transaction.created)'] = $search_month;
+            }
+            if ($search_day) {
+                $conditions['DAY(Transaction.created)']   = $search_day;
+            }
+        }
+        $this->Paginator->settings = array(
+            'conditions' => $conditions,
+        );
+        $conditions['Wallet.user_id'] = $this->Auth->user('id');
+        $conditions['Wallet.current'] = true;
         $this->Paginator->settings = array(
             'conditions' => $conditions,
         );

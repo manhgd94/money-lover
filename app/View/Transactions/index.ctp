@@ -1,5 +1,28 @@
 <div class="transactions index">
   <h2><?php echo __('Transactions'); ?></h2>
+  <div class="search panel panel-success">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        Search
+      </h2>
+    </div>
+    <div class="panel-body">
+      <?php echo $this->Form->create('Search',array('class'=>'form form-inline', 'type'=>'get'));
+      echo $this->Form->input('name',array('div'=>false,'label'=>false,'placeholder'=>'Transaction Name','class'=>'form-control'));
+      echo $this->Form->year('time', array(
+        'empty' => 'Year',
+        'class' => 'form-control'));
+      echo $this->Form->month('time', array(
+        'empty' => 'Month',
+        'class' => 'form-control'));
+      echo $this->Form->day('time', array(
+        'empty' => 'Day',
+        'class' => 'form-control'));
+      echo $this->Form->submit('Search',array('class'=>'button btn btn-success'));
+      echo $this->Form->button('Clear', array('type' => 'reset', 'class'=>'button btn btn-default'));
+      echo $this->Form->end();?>
+    </div>
+  </div>
   <table cellpadding="0" cellspacing="0" class="table table-striped table-hover">
   <thead>
   <tr>
