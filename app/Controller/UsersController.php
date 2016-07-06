@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController {
 public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('login', 'verify', 'add', 'forgetpwd', 'reset'); // Letting users register themselves
+    $this->Auth->allow('logout', 'verify', 'add', 'forgetpwd', 'reset'); // Letting users register themselves
     $this->set('active','user');
 }
 /**
@@ -51,34 +51,37 @@ public function beforeFilter() {
  */
     public function add() {
         if ($this->request->is('post')) {
-            $filename = $_SERVER['DOCUMENT_ROOT']."/cakephp/money-lover/app/webroot/img/".$this->data['User']['avatar']['name'];
+            $this->User->create();
             $hash = sha1($this->request->data['User']['username'] . rand(0, 100));
             $this->request->data['User']['tokenhash'] = $hash;
-            $this->User->create();
-            if (move_uploaded_file($this->data['User']['avatar']['tmp_name'],$filename)) {
+            if (isset($this->request->data['User']['avatar'])) {
+                $filename = WWW_ROOT . 'img' . DS .$this->data['User']['avatar']['name'];
+                move_uploaded_file($this->data['User']['avatar']['tmp_name'],$filename);
                 $this->request->data['User']['avatar'] = $this->data['User']['avatar']['name'];
-                if ($this->User->save($this->request->data)) {
-                    //============Email================//
-                    App::uses('CakeEmail', 'Network/Email');
-                    $ms    = 'http://localhost/cakephp/money-lover/users/verify/t:' . $hash . '/n:' . $this->data['User']['username'] . '';
-                    $email = new CakeEmail('smtp');
-                    $email->template('clientsreport', 'clientsreport');
-                    $email->emailFormat('html');
-                    $email->viewVars(array('message' => $ms,
-                            'name'     => $this->request->data['User']['name'],
-                            'username' => $this->request->data['User']['username'],
-                            'email'    => $this->request->data['User']['email']
-                        ));
-                    $email->from(array('manhgd94@gmail.com' => 'Money lover'));
-                    $email->to($this->request->data['User']['email']);
-                    $email->subject(' successfully created an Money lover account');
-                    $email->send();
-                    //============EndEmail================//
-                    $this->Flash->success(__('The user has been saved.'));
-                    return $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
-                }
+            } else {
+                $this->request->data['User']['avatar'] = '';
+            }
+            if ($this->User->save($this->request->data)) {
+                //============Email================//
+                App::uses('CakeEmail', 'Network/Email');
+                $ms    = Router::url( array('controller' => 'users', 'action' => 'verify'), true ). '/t:' . $hash . '/n:' . $this->data['User']['username'] . '';
+                $email = new CakeEmail('smtp');
+                $email->template('clientsreport', 'clientsreport');
+                $email->emailFormat('html');
+                $email->viewVars(array('message' => $ms,
+                        'name'     => $this->request->data['User']['name'],
+                        'username' => $this->request->data['User']['username'],
+                        'email'    => $this->request->data['User']['email']
+                    ));
+                $email->from(array('manhgd94@gmail.com' => 'Money lover'));
+                $email->to($this->request->data['User']['email']);
+                $email->subject(' successfully created an Money lover account');
+                $email->send();
+                //============EndEmail================//
+                $this->Flash->success(__('The user has been saved.'));
+                return $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
     }
@@ -95,15 +98,18 @@ public function beforeFilter() {
             throw new NotFoundException(__('Invalid user'));
         }
         if ($this->request->is(array('post', 'put'))) {
-            $filename = $_SERVER['DOCUMENT_ROOT']."/cakephp/money-lover/app/webroot/img/".$this->data['User']['avatar']['name'];
-            if (move_uploaded_file($this->data['User']['avatar']['tmp_name'],$filename)) {
+            if (isset($this->request->data['User']['avatar'])) {
+                $filename = WWW_ROOT . 'img' . DS .$this->data['User']['avatar']['name'];
+                move_uploaded_file($this->data['User']['avatar']['tmp_name'],$filename);
                 $this->request->data['User']['avatar'] = $this->data['User']['avatar']['name'];
-                if ($this->User->save($this->request->data)) {
-                    $this->Flash->success(__('The user has been saved.'));
-                    return $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
-                }
+            } else {
+                $this->request->data['User']['avatar'] = '';
+            }
+            if ($this->User->save($this->request->data)) {
+                $this->Flash->success(__('The user has been saved.'));
+                return $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         } else {
             $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -139,10 +145,10 @@ public function beforeFilter() {
                 if ($this->Auth->user('active') == 0) {
                     // User has not confirmed account
                     $this->Flash->error(__('Your account has not been activated. Please check your email.'));
-                    $this->redirect(array('controller' => 'users','action' => 'login'));
+                    $this->redirect(array('controller' => 'users', 'action' => 'login'));
                 } elseif ($this->Auth->user('active') == 1) {
                     // User is active
-                    $this->redirect(array('controller' => 'users','action' => 'index'));
+                    $this->redirect(array('controller' => 'users', 'action' => 'index'));
                 }
             } else {
                 $this->Flash->error(__('Username or password is incorrect.'));
@@ -153,7 +159,7 @@ public function beforeFilter() {
     }
     public function logout() {
         if ($this->Auth->logout()) {
-            $this->redirect(array('controller' => 'users','action' => 'login'));
+            $this->redirect(array('controller' => 'users', 'action' => 'login'));
         }
     }
 
@@ -164,26 +170,30 @@ public function beforeFilter() {
             $name      = $this->passedArgs['n'];
             $tokenhash = $this->passedArgs['t'];
             $results   = $this->User->findByUsername($name);
-            if ($results['User']['active'] == 0) {
-                //check the token
-                if ($results['User']['tokenhash'] == $tokenhash) {
-                    $results['User']['active'] = 1;
-                    //Save the data
-                    $this->User->save($results);
-                    $this->Flash->success(__('Your registration is complete'));
-                    $this->redirect('/users/login');
-                    exit;
+            if ($results) {
+                if ($results['User']['active'] == 0) {
+                    //check the token
+                    if ($results['User']['tokenhash'] == $tokenhash) {
+                        $results['User']['active'] = 1;
+                        //Save the data
+                        $this->User->save($results);
+                        $this->Flash->success(__('Your registration is complete'));
+                        $this->redirect(array('controller' => 'users', 'action' => 'login'));
+                        exit;
+                    } else {
+                        $this->Flash->error(__('Your registration failed please try again'));
+                        $this->redirect(array('controller' => 'users', 'action' => 'login'));
+                    }
                 } else {
-                    $this->Flash->error(__('Your registration failed please try again'));
-                    $this->redirect('/users/login');
+                    $this->Flash->error(__('Token has alredy been used'));
+                    $this->redirect(array('controller' => 'users', 'action' => 'login'));
                 }
             } else {
-                $this->Flash->error(__('Token has alredy been used'));
-                $this->redirect('/users/login');
+                $this->Flash->error(__('User not found.'));
             }
         } else {
             $this->Flash->error(__('Token corrupted. Please re-register'));
-            $this->redirect('/users/login');
+            $this->redirect(array('controller' => 'users', 'action' => 'login'));
         }
     }
 
@@ -224,7 +234,7 @@ public function beforeFilter() {
                             $email->send();
                             //============EndEmail=============//
                             $this->Flash->success(__('Check Your Email To Reset your password', true));
-                            $this->redirect('/users/login');
+                            $this->redirect(array('controller' => 'users', 'action' => 'login'));
                         } else {
                             $this->Flash->error(__("Error Generating Reset link"));
                         }
@@ -252,7 +262,7 @@ public function beforeFilter() {
                     if ($this->data['User']['password'] === $this->data['User']['password_confirm']) {
                         if ($this->User->save($this->User->data)) {
                             $this->Flash->success(__('Password Has been Updated'));
-                            $this->redirect(array('controller' => 'users','action' => 'login'));
+                            $this->redirect(array('controller' => 'users', 'action' => 'login'));
                         }
                     } else {
                         $this->Flash->error(__('Password and Password confirm is different.'));
@@ -262,7 +272,7 @@ public function beforeFilter() {
                 $this->Flash->error(__('Token Corrupted. Please Retry the reset link work only for once.'));
             }
         } else {
-            $this->redirect('/');
+            $this->redirect(array('controller' => 'users'));
         }
     }
 }

@@ -10,11 +10,13 @@
         'type'    => 'select',
         'options' => $opt, // typically set from $this->find('list') in controller 
         'label'   => 'Nhóm chính',
-        'default' =>'0',
+        'default' => '',
+        'empty'   => 'Đặt làm nhóm chính',
         // 'value' => $arrProjectLeaderDetails['id'],  // specify default value 
         'escape'  => false,  // prevent HTML being automatically escaped
         'error'   => false,
-        'class'   => 'form-control'
+        'class'   => 'form-control',
+        'required'=> false
       ));
       echo $this->Form->input('name', array('class' => 'form-control'));
       $options    = array('0' => 'Thu', '1' => 'Chi');

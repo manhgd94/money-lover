@@ -16,7 +16,7 @@ class Category extends AppModel {
         'pid' => array(
             'numeric' => array(
                 'rule' => array('numeric'),
-                //'message' => 'Your custom message here',
+                'message' => 'Your custom message here',
                 //'allowEmpty' => false,
                 //'required' => false,
                 //'last' => false, // Stop validation after this rule
