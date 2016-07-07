@@ -24,7 +24,16 @@ class User extends AppModel {
             ),
         ),
         'username' => array(
-            'notBlank' => array(
+            'alphaNumeric' => array(
+                'rule'    => 'alphaNumeric',
+                'message' => 'Only alphabets and numbers allowed',
+                'last'    => false
+            ),
+            'minLength' => array(
+                'rule'    => array('minLength', 8),
+                'message' => 'Minimum length of 8 characters'
+            ),
+            'isUnique' => array(
                 'rule'    => 'isUnique',
                 'message' => 'The username has already been taken',
                 //'allowEmpty' => false,
@@ -41,6 +50,10 @@ class User extends AppModel {
                 //'required' => false,
                 //'last' => false, // Stop validation after this rule
                 'on'   => 'create', // Limit validation to 'create' or 'update' operations
+            ),
+            'minLength' => array(
+                'rule'    => array('minLength', 8),
+                'message' => 'Minimum length of 8 characters'
             ),
         ),
         'email' => array(
@@ -102,6 +115,9 @@ class User extends AppModel {
         parent::beforeValidate($options);
         if ($this->data['User']['password'] == "") {
             unset($this->data['User']['password']);
+        }
+        if ($this->data['User']['avatar'] == "") {
+            unset($this->data['User']['avatar']);
         }
         
     }

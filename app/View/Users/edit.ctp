@@ -7,8 +7,8 @@
       <?php echo $this->Form->create('User', array('type' => 'file')); ?>
       <div class="avatar">
         <?php
-          if (!empty($user['User']['avatar'])) {
-            echo $this->Html->image(h($user['User']['avatar']), array('alt' => 'avatar', 'class'=>'avatar-img'));
+          if (!empty($this->request->data['User']['avatar'])) {
+            echo $this->Html->image(h($this->request->data['User']['avatar']), array('alt' => 'avatar', 'class'=>'avatar-img'));
           } else {
             echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class' => 'avatar-img'));
           }

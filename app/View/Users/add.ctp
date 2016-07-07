@@ -7,12 +7,9 @@
       <?php echo $this->Form->create('User', array('type' => 'file')); ?>
       <div class="avatar">
         <?php
-          if (!empty($user['User']['avatar'])) {
-            echo $this->Html->image(h($user['User']['avatar']), array('alt' => 'avatar', 'class'=>'avatar-img'));
-          } else {
-            echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class' => 'avatar-img'));
-          }
-          echo $this->Form->input('avatar', array('label'=>false, 'type'=>'file', 'class'=>'form-control', 'required' => false)); ?>
+          echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class' => 'avatar-img'));
+          echo $this->Form->input('avatar', array('label'=>false, 'type'=>'file', 'class'=>'form-control', 'required' => false));
+        ?>
       </div>
       <div class="info">
         <?php

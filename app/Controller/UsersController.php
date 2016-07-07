@@ -55,9 +55,13 @@ public function beforeFilter() {
             $hash = sha1($this->request->data['User']['username'] . rand(0, 100));
             $this->request->data['User']['tokenhash'] = $hash;
             if (isset($this->request->data['User']['avatar'])) {
-                $filename = WWW_ROOT . 'img' . DS .$this->data['User']['avatar']['name'];
+                $temp = explode(".", $this->request->data['User']['avatar']['name']);
+                $explode = end($temp);
+                $name = $this->request->data['User']['username'];
+                $newfilename = $name.'-'.rand(0, 10000).'.'.$explode;
+                $filename = WWW_ROOT . 'img' . DS .$newfilename;
                 move_uploaded_file($this->data['User']['avatar']['tmp_name'],$filename);
-                $this->request->data['User']['avatar'] = $this->data['User']['avatar']['name'];
+                $this->request->data['User']['avatar'] = $newfilename;
             } else {
                 $this->request->data['User']['avatar'] = '';
             }
@@ -98,10 +102,14 @@ public function beforeFilter() {
             throw new NotFoundException(__('Invalid user'));
         }
         if ($this->request->is(array('post', 'put'))) {
-            if (isset($this->request->data['User']['avatar'])) {
-                $filename = WWW_ROOT . 'img' . DS .$this->data['User']['avatar']['name'];
+            if (!empty($this->request->data['User']['avatar']['name'])) {
+                $temp = explode(".", $this->request->data['User']['avatar']['name']);
+                $explode = end($temp);
+                $name = $this->request->data['User']['username'];
+                $newfilename = $name.'-'.rand(0, 10000).'.'.$explode;
+                $filename = WWW_ROOT . 'img' . DS .$newfilename;
                 move_uploaded_file($this->data['User']['avatar']['tmp_name'],$filename);
-                $this->request->data['User']['avatar'] = $this->data['User']['avatar']['name'];
+                $this->request->data['User']['avatar'] = $newfilename;
             } else {
                 $this->request->data['User']['avatar'] = '';
             }
