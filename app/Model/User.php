@@ -45,8 +45,8 @@ class User extends AppModel {
         ),
         'email' => array(
             'email' => array(
-                'rule' => array('email'),
-                //'message' => 'Your custom message here',
+                'rule' => 'isUnique',
+                'message' => 'The email has already been taken',
                 //'allowEmpty' => false,
                 //'required' => false,
                 //'last' => false, // Stop validation after this rule
