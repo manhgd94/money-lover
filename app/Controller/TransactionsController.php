@@ -78,14 +78,16 @@ public function beforeFilter(){
         if ($this->request->is('post')) {
             $this->Transaction->create();
             if ($this->Transaction->save($this->request->data)) {
-                //change expense-income new wallet
+                //add expense-income new wallet
                 $this->loadmodel('Category');
                 $this->Category->recursive = -1;
                 $cat = $this->Category->findById($this->request->data['Transaction']['category_id']);
-                $wallet_id = $this->request->data['Transaction']['wallet_id'];
-                $money     = $this->request->data['Transaction']['money'];
-                $type      = $cat['Category']['type'];
-                $this->expenseincome($wallet_id, $money, $type);
+                $data = array(
+                    'wallet_id' => $this->request->data['Transaction']['wallet_id'],
+                    'money'     => $this->request->data['Transaction']['money'],
+                    'type'      => $cat['Category']['type'],
+                    );
+                $this->expenseincome($data);
 
                 $this->Flash->success(__('The transaction has been saved.'));
                 return $this->redirect(array('action' => 'index'));
@@ -111,26 +113,27 @@ public function beforeFilter(){
             throw new NotFoundException(__('Invalid transaction'));
         }
         if ($this->request->is(array('post', 'put'))) {
-            $conditions = array('conditions' => array('Transaction.id' => $id));
-            $trans = $this->Transaction->find('first', $conditions);
+            $trans = $this->Transaction->findById($id);
 
             if ($this->Transaction->save($this->request->data)) {
-                //change expense-income old wallet
-                if ($trans['Transaction']['wallet_id'] != $this->request->data['Transaction']['money']) {
-                    $wallet_id = $trans['Transaction']['wallet_id'];
-                    $money     = -$trans['Transaction']['money'];
-                    $type      = $trans['Category']['type'];
-                    $this->expenseincome($wallet_id, $money, $type);
-                }
+                //subtract expense-income in old-wallet
+                $data = array(
+                    'wallet_id' => $trans['Transaction']['wallet_id'],
+                    'money'     => -$trans['Transaction']['money'],
+                    'type'      => $trans['Category']['type'],
+                    );
+                $this->expenseincome($data);
                 
-                //change expense-income new wallet
+                //add expense-income in new-wallet
                 $this->loadmodel('Category');
                 $this->Category->recursive = -1;
                 $cat = $this->Category->findById($this->request->data['Transaction']['category_id']);
-                $wallet_id = $this->request->data['Transaction']['wallet_id'];
-                $money     = $this->request->data['Transaction']['money'];
-                $type      = $cat['Category']['type'];
-                $this->expenseincome($wallet_id, $money, $type);
+                $data = array(
+                    'wallet_id' => $this->request->data['Transaction']['wallet_id'],
+                    'money'     => $this->request->data['Transaction']['money'],
+                    'type'      => $cat['Category']['type'],
+                    );
+                $this->expenseincome($data);
 
                 $this->Flash->success(__('The transaction has been saved.'));
                 return $this->redirect(array('action' => 'index'));
@@ -161,11 +164,13 @@ public function beforeFilter(){
         }
         $this->request->allowMethod('post', 'delete');
             $trans = $this->Transaction->findById($id);
-            $wallet_id = $trans['Transaction']['wallet_id'];
-            $money     = -$trans['Transaction']['money'];
-            $type      = $trans['Category']['type'];
+            $data = array(
+                        'wallet_id' => $trans['Transaction']['wallet_id'],
+                        'money'     => -$trans['Transaction']['money'],
+                        'type'      => $trans['Category']['type'],
+                        );
         if ($this->Transaction->delete()) {
-            $this->expenseincome($wallet_id, $money, $type);
+            $this->expenseincome($data);
             $this->Flash->success(__('The transaction has been deleted.'));
         } else {
             $this->Flash->error(__('The transaction could not be deleted. Please, try again.'));
@@ -174,19 +179,19 @@ public function beforeFilter(){
     }
 
 //change expense-income
-    public function expenseincome($wallet_id, $money, $type){
+    public function expenseincome($data){
         $this->loadmodel('Wallet');
-        $this->Wallet->id = $wallet_id;
-        if ($type == $this->chi) {
+        $this->Wallet->id = $data['wallet_id'];
+        if ($data['type'] == $this->chi) {
             $this->Wallet->updateAll(
-                array('Wallet.expense' => 'Wallet.expense + ' . $money),                    
-                array('Wallet.id' => $wallet_id)
+                array('Wallet.expense' => 'Wallet.expense + ' . $data['money']),                    
+                array('Wallet.id' => $data['wallet_id'])
             );
         }
-        if ($type == $this->thu) {
+        if ($data['type'] == $this->thu) {
             $this->Wallet->updateAll(
-                array('Wallet.income' => 'Wallet.income + ' . $money),                    
-                array('Wallet.id' => $wallet_id)
+                array('Wallet.income' => 'Wallet.income + ' . $data['money']),                    
+                array('Wallet.id' => $data['wallet_id'])
             );
         }
     }
