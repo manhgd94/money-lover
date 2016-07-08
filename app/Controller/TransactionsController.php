@@ -46,9 +46,6 @@ public function beforeFilter(){
                 $conditions['DAY(Transaction.created)']   = $search_day;
             }
         }
-        $this->Paginator->settings = array(
-            'conditions' => $conditions,
-        );
         $conditions['Wallet.user_id'] = $this->Auth->user('id');
         $conditions['Wallet.current'] = true;
         $this->Paginator->settings = array(
