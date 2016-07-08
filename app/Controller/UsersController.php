@@ -54,7 +54,7 @@ public function beforeFilter() {
             $this->User->create();
             $hash = sha1($this->request->data['User']['username'] . rand(0, 100));
             $this->request->data['User']['tokenhash'] = $hash;
-            if (isset($this->request->data['User']['avatar'])) {
+            if (!empty($this->request->data['User']['avatar']['name'])) {
                 $temp = explode(".", $this->request->data['User']['avatar']['name']);
                 $explode = end($temp);
                 $name = $this->request->data['User']['username'];
@@ -183,6 +183,7 @@ public function beforeFilter() {
                     //check the token
                     if ($results['User']['tokenhash'] == $tokenhash) {
                         $results['User']['active'] = 1;
+                        $results['User']['password'] = '';
                         //Save the data
                         $this->User->save($results);
                         $this->Flash->success(__('Your registration is complete'));
