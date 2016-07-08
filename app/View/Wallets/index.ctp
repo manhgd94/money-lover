@@ -23,8 +23,8 @@
     <td><?php if (h($wallet['Wallet']['current'])==true): ?>
       <span class="glyphicon glyphicon-ok"></span>
     <?php endif ?></td>
-    <td><?php echo h($wallet['Wallet']['expense']); ?>&nbsp;</td>
-    <td><?php echo h($wallet['Wallet']['income']); ?>&nbsp;</td>
+    <td><?php echo $this->App->adddotstring(h($wallet['Wallet']['expense'])); ?>&nbsp;</td>
+    <td><?php echo $this->App->adddotstring(h($wallet['Wallet']['income'])); ?>&nbsp;</td>
     <td class="actions">
       <?php echo $this->Html->link(__('View'), array('action' => 'view', $wallet['Wallet']['id']), array('class'=>'button btn btn-info')); ?>
       <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $wallet['Wallet']['id']), array('class'=>'button btn btn-success')); ?>

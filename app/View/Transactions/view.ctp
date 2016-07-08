@@ -14,7 +14,7 @@
           echo "<label>Note</label><br>";
           echo h($transaction['Transaction']['note'])."<br>";
           echo "<label>Money</label><br>";
-          echo h($transaction['Transaction']['money'])."<br>";
+          echo $this->App->adddotstring(h($transaction['Transaction']['money']))."<br>";
           echo "<label>Created</label><br>";
           echo h($transaction['Transaction']['created'])."<br>";
           echo "<label>Modified</label><br>";

@@ -49,7 +49,7 @@
     </td>
     <td><?php echo h($transaction['Transaction']['name']); ?>&nbsp;</td>
     <td><?php echo h($transaction['Transaction']['note']); ?>&nbsp;</td>
-    <td><?php echo h($transaction['Transaction']['money']); ?>&nbsp;</td>
+    <td><?php echo $this->App->adddotstring(h($transaction['Transaction']['money'])); ?>&nbsp;</td>
     <td><?php echo h($transaction['Transaction']['created']); ?>&nbsp;</td>
     <td><?php echo h($transaction['Transaction']['modified']); ?>&nbsp;</td>
     <td class="actions">
