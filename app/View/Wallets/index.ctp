@@ -26,9 +26,9 @@
     <td><?php echo $this->App->adddotstring(h($wallet['Wallet']['expense'])); ?>&nbsp;</td>
     <td><?php echo $this->App->adddotstring(h($wallet['Wallet']['income'])); ?>&nbsp;</td>
     <td class="actions">
-      <?php echo $this->Html->link(__('View'), array('action' => 'view', $wallet['Wallet']['id']), array('class'=>'button btn btn-info')); ?>
-      <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $wallet['Wallet']['id']), array('class'=>'button btn btn-success')); ?>
-      <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $wallet['Wallet']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $wallet['Wallet']['id']), 'class'=>'button btn btn-danger')); ?>
+      <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-search')), array('action' => 'view', $wallet['Wallet']['id']), array('class'=>'button btn btn-sm btn-info', 'escape'=>false)); ?>
+      <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')), array('action' => 'edit', $wallet['Wallet']['id']), array('class'=>'button btn btn-sm btn-success', 'escape'=>false)); ?>
+      <?php echo $this->Form->postLink($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')), array('action' => 'delete', $wallet['Wallet']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $wallet['Wallet']['id']), 'class'=>'button btn btn-sm btn-danger', 'escape'=>false)); ?>
     </td>
   </tr>
 <?php endforeach ?>
