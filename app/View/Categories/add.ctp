@@ -25,7 +25,16 @@
     ?>
     <br>
     <?php
-      echo $this->Form->submit(__('Create',true), array('class' => 'btn btn-success')); 
+      echo $this->Form->submit(__('Create',true), array('class' => 'btn btn-success'));
+      echo $this->Form->button(
+          'Back', 
+          array(
+            'formaction' => Router::url(
+                array('controller' => 'categories','action' => 'index')
+            ),
+            'class' => 'btn btn-default'
+          )
+      );
       echo $this->Form->end();
     ?>
     </div>

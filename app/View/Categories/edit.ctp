@@ -11,6 +11,7 @@
         'type'    => 'select',
         'options' => $opt, // typically set from $this->find('list') in controller 
         'label'   => 'Nhóm chính',
+        'empty'   => 'Đặt làm nhóm chính',
         // 'value' => $arrProjectLeaderDetails['id'],  // specify default value 
         'escape'  => false,  // prevent HTML being automatically escaped
         'error'   => false,
@@ -23,7 +24,8 @@
     ?>
     <br>
     <?php
-      echo $this->Form->submit(__('Create',true), array('class'=>'btn btn-success')); 
+      echo $this->Form->submit(__('Edit',true), array('class'=>'btn btn-success'));
+      echo $this->Html->link(__('Back'),   array('action' => 'index'), array('class' => 'btn btn-info'));
       echo $this->Form->end();
     ?>
     </div>

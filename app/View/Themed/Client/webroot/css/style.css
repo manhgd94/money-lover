@@ -77,7 +77,7 @@ img.avatar-img{
 	color: rgba(51,122,183,0.60);
 }
 .cat-sub{
-	padding-left: 30px;
+	padding-left: 35px !important;
 }
 .thu, .chi{
 	width: 50%;
@@ -85,5 +85,11 @@ img.avatar-img{
 .total-money{
 	float: right;
 	margin: 0px 10px;
-	width: 200px;
+}
+.thu>table, .chi>table{
+	width: 100%;
+}
+.panel-body .btn{
+	float: left;
+	margin-right: 5px;
 }

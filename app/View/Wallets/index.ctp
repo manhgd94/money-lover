@@ -1,10 +1,13 @@
 <div class="wallets index">
   <h2><?php echo __('Wallets'); ?></h2>
+  <div class="panel panel-primary">
+    <div class="panel-body">
+      <?php echo $this->Html->link(__('Add Wallet'), array('action' => 'add'), array('class'=>'button btn btn-success')); ?>
+    </div>
+  </div>
   <table cellpadding="0" cellspacing="0" class="table table-striped table-hover">
   <thead>
   <tr>
-    <th><?php echo $this->Paginator->sort('id'); ?></th>
-    <th><?php echo $this->Paginator->sort('user_id'); ?></th>
     <th><?php echo $this->Paginator->sort('name'); ?></th>
     <th><?php echo $this->Paginator->sort('current'); ?></th>
     <th><?php echo $this->Paginator->sort('expense'); ?></th>
@@ -15,10 +18,6 @@
   <tbody>
   <?php foreach ($wallets as $wallet): ?>
   <tr>
-    <td><?php echo h($wallet['Wallet']['id']); ?>&nbsp;</td>
-    <td>
-      <?php echo $this->Html->link($wallet['User']['name'], array('controller' => 'users', 'action' => 'view', $wallet['User']['id'])); ?>
-    </td>
     <td><?php echo h($wallet['Wallet']['name']); ?>&nbsp;</td>
     <td><?php if (h($wallet['Wallet']['current'])==true): ?>
       <span class="glyphicon glyphicon-ok"></span>
@@ -26,9 +25,9 @@
     <td><?php echo $this->App->adddotstring(h($wallet['Wallet']['expense'])); ?>&nbsp;</td>
     <td><?php echo $this->App->adddotstring(h($wallet['Wallet']['income'])); ?>&nbsp;</td>
     <td class="actions">
-      <?php echo $this->Html->link(__('View'), array('action' => 'view', $wallet['Wallet']['id']), array('class'=>'button btn btn-info')); ?>
-      <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $wallet['Wallet']['id']), array('class'=>'button btn btn-success')); ?>
-      <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $wallet['Wallet']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $wallet['Wallet']['id']), 'class'=>'button btn btn-danger')); ?>
+      <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-search')), array('action' => 'view', $wallet['Wallet']['id']), array('class'=>'button btn btn-sm btn-info', 'escape'=>false)); ?>
+      <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')), array('action' => 'edit', $wallet['Wallet']['id']), array('class'=>'button btn btn-sm btn-success', 'escape'=>false)); ?>
+      <?php echo $this->Form->postLink($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')), array('action' => 'delete', $wallet['Wallet']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $wallet['Wallet']['id']), 'class'=>'button btn btn-sm btn-danger', 'escape'=>false)); ?>
     </td>
   </tr>
 <?php endforeach ?>
@@ -49,14 +48,4 @@
       ?>
     </ul>
   </div>
-</div>
-<div class="actions">
-  <h3><?php echo __('Actions'); ?></h3>
-  <ul>
-    <li><?php echo $this->Html->link(__('New Wallet'),        array('action'     => 'add')); ?></li>
-    <li><?php echo $this->Html->link(__('List Users'),        array('controller' => 'users',        'action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New User'),          array('controller' => 'users',        'action' => 'add')); ?> </li>
-    <li><?php echo $this->Html->link(__('List Transactions'), array('controller' => 'transactions', 'action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New Transaction'),   array('controller' => 'transactions', 'action' => 'add')); ?> </li>
-  </ul>
 </div>

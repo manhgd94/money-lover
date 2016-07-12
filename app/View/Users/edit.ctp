@@ -24,7 +24,8 @@
         ?>
         <br>
         <?php
-          echo $this->Form->submit(__('Submit',true), array('class'=>'btn btn-success')); 
+          echo $this->Form->submit(__('Edit',true), array('class'=>'btn btn-success'));
+          echo $this->Html->link(__('Back'),   array('action' => 'index'), array('class' => 'btn btn-info'));
           echo $this->Form->end();
         ?>
       </div>

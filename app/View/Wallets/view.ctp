@@ -4,18 +4,33 @@
       <h3 class="panel-title">Wallet</h3>
     </div>
     <div class="panel-body">
-      <?php
-        echo "<label>User</label><br>";
-        echo $this->Html->link($wallet['User']['name'], array('controller' => 'users', 'action' => 'view', $wallet['User']['id']))."<br>";
-        echo "<label>Name</label><br>";
-        echo h($wallet['Wallet']['name'])."<br>";
-        echo "<label>Current</label><br>";
-        echo h($wallet['Wallet']['current'])."<br>";
-        echo "<label>Expense</label><br>";
-        echo $this->App->adddotstring(h($wallet['Wallet']['expense']))."<br>";
-        echo "<label>Income</label><br>";
-        echo $this->App->adddotstring(h($wallet['Wallet']['income']))."<br>";
-      ?>
+      <table class="table">
+        <tr>
+          <td><?php echo "<label>User</label><br>"; ?></td>
+          <td><?php echo $this->Html->link($wallet['User']['name'], array('controller' => 'users', 'action' => 'view', $wallet['User']['id'])); ?></td>
+        </tr>
+        <tr>
+          <td><?php echo "<label>Name</label><br>"; ?></td>
+          <td><?php echo h($wallet['Wallet']['name']); ?></td>
+        </tr>
+        <tr>
+          <td><?php echo "<label>Current</label><br>"; ?></td>
+          <td>
+            <?php if (h($wallet['Wallet']['current'])==true): ?>
+              <span class="glyphicon glyphicon-ok"></span>
+            <?php endif ?>
+          </td>
+        </tr>
+        <tr>
+          <td><?php echo "<label>Expense</label><br>"; ?></td>
+          <td><?php echo $this->App->adddotstring(h($wallet['Wallet']['expense'])); ?></td>
+        </tr>
+        <tr>
+          <td><?php echo "<label>Income</label><br>"; ?></td>
+          <td><?php echo $this->App->adddotstring(h($wallet['Wallet']['income'])); ?></td>
+        </tr>
+      </table>
+      <?php echo $this->Html->link(__('Back'),   array('action' => 'index'), array('class' => 'btn btn-info')); ?>
     </div>
   </div>
 </div>
