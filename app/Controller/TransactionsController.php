@@ -18,7 +18,7 @@ public function beforeFilter(){
  *
  * @var array
  */
-    public $components = array('Paginator');
+	public $components = array('Paginator');
 
 /**
  * index method
@@ -61,13 +61,13 @@ public function beforeFilter(){
  * @param string $id
  * @return void
  */
-    public function view($id = null) {
-        if (!$this->Transaction->exists($id)) {
-            throw new NotFoundException(__('Invalid transaction'));
-        }
-        $options = array('conditions' => array('Transaction.' . $this->Transaction->primaryKey => $id));
-        $this->set('transaction', $this->Transaction->find('first', $options));
-    }
+	public function view($id = null) {
+		if (!$this->Transaction->exists($id)) {
+			throw new NotFoundException(__('Invalid transaction'));
+		}
+		$options = array('conditions' => array('Transaction.' . $this->Transaction->primaryKey => $id));
+		$this->set('transaction', $this->Transaction->find('first', $options));
+	}
 
 /**
  * add method
