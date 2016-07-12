@@ -6,7 +6,11 @@
     <div class="panel-body">
       <div class="avatar">
         <?php
-          echo $this->Html->image(h($user['User']['avatar']), array('alt' => 'avatar', 'class'=>'avatar-img'));
+          if ($user['User']['avatar']) {
+            echo $this->Html->image(h($user['User']['avatar']), array('alt' => 'avatar', 'class'=>'avatar-img'));
+          } else {
+            echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class' => 'avatar-img'));
+          }
         ?>
       </div>
       <div class="info">
@@ -19,6 +23,7 @@
           echo h($user['User']['email'])."<br>";
           echo "<label>Ngày tạo</label><br>";
           echo h($user['User']['created'])."<br>";
+          echo $this->Html->link(__('Back'),   array('action' => 'index'), array('class' => 'btn btn-info'));
         ?>
       </div>
     </div>
