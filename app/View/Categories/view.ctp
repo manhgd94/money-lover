@@ -4,14 +4,20 @@
       <h3 class="panel-title">Category</h3>
     </div>
     <div class="panel-body">
-      <?php
-        echo "<label>Pid</label><br>";
-        echo h($category['Category']['pid'])."<br>";
-        echo "<label>Name</label><br>";
-        echo h($category['Category']['name'])."<br>";
-        echo "<label>Type</label><br>";
-        echo h($category['Category']['type'])."<br>";
-      ?>
+      <table class="table">
+        <tr>
+          <td><?php echo "<label>Pid</label><br>"; ?></td>
+          <td><?php echo h($category['Category']['pid']); ?></td>
+        </tr>
+        <tr>
+          <td><?php echo "<label>Name</label><br>"; ?></td>
+          <td><?php echo h($category['Category']['name']); ?></td>
+        </tr>
+        <tr>
+          <td><?php echo "<label>Type</label><br>"; ?></td>
+          <td><?php echo h($category['Category']['type']); ?></td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
