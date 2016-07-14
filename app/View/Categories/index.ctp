@@ -5,7 +5,7 @@
       <?php echo $this->Html->link(__('Add Category'), array('action' => 'add'), array('class'=>'button btn btn-success')); ?>
     </div>
   </div>
-  <div class="thu" style="float: left;">
+  <div class="thu pull-left">
     <h3>Thu</h3>
     <table class="table table-hover">
       <?php foreach ($categories as $category): ?>
@@ -32,7 +32,7 @@
       <?php endforeach ?>
     </table>
   </div>
-  <div class="chi" style="float: left;">
+  <div class="chi pull-left">
     <h3>Chi</h3>
     <table class="table table-hover">
       <?php foreach ($categories as $category): ?>
