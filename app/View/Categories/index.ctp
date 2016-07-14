@@ -11,7 +11,7 @@
       <?php foreach ($categories as $category): ?>
         <?php if ($category['Category']['type'] == 0 && $category['Category']['pid'] == 0): ?>
           <tr class="cat-p">
-            <td><?php echo $this->Html->link(__(h($category['Category']['name'])), array('action' => 'view', $category['Category']['id'])); ?></td>
+            <td><?php echo $this->Html->link(h(__($category['Category']['name'])), array('action' => 'view', $category['Category']['id'])); ?></td>
             <td>
               <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')), array('action' => 'edit', $category['Category']['id']), array('class'=>'button btn btn-sm btn-success', 'escape'=>false)); ?>
               <?php echo $this->Form->postLink($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')), array('action' => 'delete', $category['Category']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $category['Category']['id']), 'class' => 'button btn btn-sm btn-danger', 'escape'=>false)); ?>
@@ -20,7 +20,7 @@
           <?php foreach ($categories as $cat): ?>
             <?php if ($cat['Category']['pid'] == $category['Category']['id']): ?>
               <tr>
-                <td class="cat-sub"><?php echo $this->Html->link(__(h($cat['Category']['name'])), array('action' => 'view', $cat['Category']['id'])); ?></td>
+                <td class="cat-sub"><?php echo $this->Html->link(h(__($cat['Category']['name'])), array('action' => 'view', $cat['Category']['id'])); ?></td>
                 <td>
                   <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')), array('action' => 'edit', $cat['Category']['id']), array('class'=>'button btn btn-sm btn-success', 'escape'=>false)); ?>
                   <?php echo $this->Form->postLink($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')), array('action' => 'delete', $cat['Category']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $cat['Category']['id']), 'class' => 'button btn btn-sm btn-danger', 'escape'=>false)); ?>
@@ -38,7 +38,7 @@
       <?php foreach ($categories as $category): ?>
         <?php if ($category['Category']['type'] == 1 && $category['Category']['pid'] == 0): ?>
           <tr class="cat-p">
-            <td><?php echo $this->Html->link(__(h($category['Category']['name'])), array('action' => 'view', $category['Category']['id'])); ?></td>
+            <td><?php echo $this->Html->link(h(__($category['Category']['name'])), array('action' => 'view', $category['Category']['id'])); ?></td>
             <td>
               <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')), array('action' => 'edit', $category['Category']['id']), array('class'=>'button btn btn-sm btn-success', 'escape'=>false)); ?>
               <?php echo $this->Form->postLink($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')), array('action' => 'delete', $category['Category']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $category['Category']['id']), 'class' => 'button btn btn-sm btn-danger', 'escape'=>false)); ?>
@@ -47,7 +47,7 @@
           <?php foreach ($categories as $cat): ?>
             <?php if ($cat['Category']['pid'] == $category['Category']['id']): ?>
               <tr>
-                <td class="cat-sub"><?php echo $this->Html->link(__(h($cat['Category']['name'])), array('action' => 'view', $cat['Category']['id'])); ?></td>
+                <td class="cat-sub"><?php echo $this->Html->link(h(__($cat['Category']['name'])), array('action' => 'view', $cat['Category']['id'])); ?></td>
                 <td>
                   <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')), array('action' => 'edit', $cat['Category']['id']), array('class'=>'button btn btn-sm btn-success', 'escape'=>false)); ?>
                   <?php echo $this->Form->postLink($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')), array('action' => 'delete', $cat['Category']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $cat['Category']['id']), 'class' => 'button btn btn-sm btn-danger', 'escape'=>false)); ?>
