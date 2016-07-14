@@ -46,9 +46,22 @@
     <td><?php echo $this->App->adddotstring(h($transaction['Transaction']['money'])); ?>&nbsp;</td>
     <td><?php echo h($transaction['Transaction']['created']); ?>&nbsp;</td>
     <td class="actions">
-      <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-search')), array('action' => 'view', $transaction['Transaction']['id']), array('class'=>'button btn btn-sm btn-info', 'escape'=>false)); ?>
-      <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')), array('action' => 'edit', $transaction['Transaction']['id']), array('class'=>'button btn btn-sm btn-success', 'escape'=>false)); ?>
-      <?php echo $this->Form->postLink($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')), array('action' => 'delete', $transaction['Transaction']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $transaction['Transaction']['id']), 'class'=>'button btn btn-sm btn-danger', 'escape'=>false)); ?>
+      <?php
+        echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-search')),
+          array('action' => 'view', $transaction['Transaction']['id']),
+          array('class'=>'button btn btn-sm btn-info', 'escape'=>false));
+      ?>
+      <?php
+        echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')),
+          array('action' => 'edit', $transaction['Transaction']['id']),
+          array('class'=>'button btn btn-sm btn-success', 'escape'=>false));
+      ?>
+      <?php
+        echo $this->Form->postLink($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')),
+          array('action' => 'delete', $transaction['Transaction']['id']),
+          array('confirm' => __('Are you sure you want to delete # %s?', $transaction['Transaction']['id']),
+                'class'=>'button btn btn-sm btn-danger', 'escape'=>false));
+      ?>
     </td>
   </tr>
   <?php endforeach ?>
