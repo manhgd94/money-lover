@@ -1,6 +1,6 @@
 <div class="panel-group" id="accordion">
   <?php foreach ($wallets as $wl): ?>
-    <div class="panel panel-default <?php if ($wl['Wallet']['current'] == true) echo "panel-success"?>">
+    <div class="panel panel-default <?php if ($wl['Wallet']['current']) echo "panel-success"?>">
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $wl['Wallet']['id']; ?>">
@@ -25,7 +25,13 @@
                 <tr>
                   <td><?php echo $trs['Transaction']['name']; ?></td>
                   <td><?php echo $trs['Transaction']['note']; ?></td>
-                  <td><?php echo $this->App->adddotstring($trs['Transaction']['money']); ?></td>
+                  <?php if ($trs['Category']['type']): ?>
+                    <td class="text-danger">
+                  <?php else: ?>
+                    <td class="text-success">
+                  <?php endif ?>
+                    <?php echo $this->App->adddotstring($trs['Transaction']['money']); ?>
+                  </td>
                   <td><?php echo $trs['Transaction']['created']; ?></td>
                   <td class="actions">
                     <?php

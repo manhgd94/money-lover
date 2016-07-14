@@ -16,7 +16,7 @@
         <tr>
           <td><?php echo "<label>Current</label><br>"; ?></td>
           <td>
-            <?php if (h($wallet['Wallet']['current'])==true): ?>
+            <?php if (h($wallet['Wallet']['current'])): ?>
               <span class="glyphicon glyphicon-ok"></span>
             <?php endif ?>
           </td>

@@ -19,7 +19,7 @@
   <?php foreach ($wallets as $wallet): ?>
   <tr>
     <td><?php echo h($wallet['Wallet']['name']); ?>&nbsp;</td>
-    <td><?php if (h($wallet['Wallet']['current'])==true): ?>
+    <td><?php if (h($wallet['Wallet']['current'])): ?>
       <span class="glyphicon glyphicon-ok"></span>
     <?php endif ?></td>
     <td><?php echo $this->App->adddotstring(h($wallet['Wallet']['expense'])); ?>&nbsp;</td>

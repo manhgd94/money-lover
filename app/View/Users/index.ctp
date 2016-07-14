@@ -28,7 +28,7 @@
         <?php echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class' => 'avatar-img')); ?>
       <?php endif ?>
     </td>
-    <td><?php if (h($user['User']['active'])==true): ?>
+    <td><?php if (h($user['User']['active'])): ?>
       <span class="glyphicon glyphicon-ok"></span>
     <?php else: ?>
       <span class="glyphicon glyphicon-remove"></span>

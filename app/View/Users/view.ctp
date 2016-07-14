@@ -42,7 +42,7 @@
   <tr>
     <td><?php echo $wallet['name']; ?></td>
     <td>
-      <?php if (h($wallet['current'])==true): ?>
+      <?php if (h($wallet['current'])): ?>
         <span class="glyphicon glyphicon-ok"></span>
       <?php endif ?>
     </td>

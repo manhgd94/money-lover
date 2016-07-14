@@ -12,7 +12,8 @@
           } else {
             echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class' => 'avatar-img'));
           }
-          echo $this->Form->input('avatar', array('label'=>false, 'type'=>'file', 'class'=>'form-control', 'required' => false)); ?>
+          echo $this->Form->input('avatar', array('label'=>false, 'type'=>'file', 'class'=>'form-control', 'required' => false));
+        ?>
       </div>
       <div class="info">
         <?php
