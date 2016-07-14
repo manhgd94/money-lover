@@ -28,9 +28,22 @@
                   <td><?php echo $this->App->adddotstring($trs['Transaction']['money']); ?></td>
                   <td><?php echo $trs['Transaction']['created']; ?></td>
                   <td class="actions">
-                    <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-search')), array('controller' => 'wallets', 'action' => 'view', $trs['Wallet']['id']), array('class'=>'button btn btn-sm btn-info', 'escape'=>false)); ?>
-                    <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')), array('controller' => 'wallets', 'action' => 'edit', $trs['Wallet']['id']), array('class'=>'button btn btn-sm btn-success', 'escape'=>false)); ?>
-                    <?php echo $this->Form->postLink($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')), array('controller' => 'wallets', 'action' => 'delete', $trs['Wallet']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $trs['Wallet']['id']), 'class'=>'button btn btn-sm btn-danger', 'escape'=>false)); ?>
+                    <?php
+                      echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-search')),
+                        array('controller' => 'wallets', 'action' => 'view', $trs['Wallet']['id']),
+                        array('class'=>'button btn btn-sm btn-info', 'escape'=>false));
+                    ?>
+                    <?php
+                      echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')),
+                        array('controller' => 'wallets', 'action' => 'edit', $trs['Wallet']['id']),
+                        array('class'=>'button btn btn-sm btn-success', 'escape'=>false));
+                    ?>
+                    <?php
+                      echo $this->Form->postLink($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')),
+                        array('controller' => 'wallets', 'action' => 'delete', $trs['Wallet']['id']),
+                        array('confirm' => __('Are you sure you want to delete # %s?', $trs['Wallet']['id']),
+                              'class'=>'button btn btn-sm btn-danger', 'escape'=>false));
+                    ?>
                   </td>
                 </tr>
               <?php endif ?>
