@@ -79,6 +79,9 @@ img.avatar-img{
 .cat-sub{
 	padding-left: 35px !important;
 }
+.cat-p{
+	background-color: #f9f9f9;
+}
 .thu, .chi{
 	width: 50%;
 }

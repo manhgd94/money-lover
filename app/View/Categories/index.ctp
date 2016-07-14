@@ -7,10 +7,10 @@
   </div>
   <div class="thu" style="float: left;">
     <h3>Thu</h3>
-    <table class="table table-striped table-hover">
+    <table class="table table-hover">
       <?php foreach ($categories as $category): ?>
         <?php if ($category['Category']['type'] == 0 && $category['Category']['pid'] == 0): ?>
-          <tr>
+          <tr class="cat-p">
             <td><?php echo $this->Html->link(__(h($category['Category']['name'])), array('action' => 'view', $category['Category']['id'])); ?></td>
             <td>
               <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')), array('action' => 'edit', $category['Category']['id']), array('class'=>'button btn btn-sm btn-success', 'escape'=>false)); ?>
@@ -34,10 +34,10 @@
   </div>
   <div class="chi" style="float: left;">
     <h3>Chi</h3>
-    <table class="table table-striped table-hover">
+    <table class="table table-hover">
       <?php foreach ($categories as $category): ?>
         <?php if ($category['Category']['type'] == 1 && $category['Category']['pid'] == 0): ?>
-          <tr>
+          <tr class="cat-p">
             <td><?php echo $this->Html->link(__(h($category['Category']['name'])), array('action' => 'view', $category['Category']['id'])); ?></td>
             <td>
               <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')), array('action' => 'edit', $category['Category']['id']), array('class'=>'button btn btn-sm btn-success', 'escape'=>false)); ?>
