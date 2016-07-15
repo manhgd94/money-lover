@@ -23,16 +23,17 @@
           echo h($user['User']['email'])."<br>";
           echo "<label>Ngày tạo</label><br>";
           echo h($user['User']['created'])."<br>";
-          echo $this->Html->link(__('Back'),   array('action' => 'index'), array('class' => 'btn btn-info'));
+          echo "<button class='btn btn-default' onclick='goBack()'>Go Back</button>";
         ?>
       </div>
     </div>
   </div>
 </div>
+<div class="clear"></div>
 <div class="related">
   <h3><?php echo __('Related Wallets'); ?></h3>
   <?php if (!empty($user['Wallet'])): ?>
-  <table cellpadding = "0" cellspacing = "0">
+  <table class="table">
   <tr>
     <th><?php echo __('Name'); ?></th>
     <th><?php echo __('Current'); ?></th>
@@ -42,7 +43,7 @@
   <tr>
     <td><?php echo $wallet['name']; ?></td>
     <td>
-      <?php if (h($wallet['current'])==true): ?>
+      <?php if (h($wallet['current'])): ?>
         <span class="glyphicon glyphicon-ok"></span>
       <?php endif ?>
     </td>

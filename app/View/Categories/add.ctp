@@ -26,25 +26,9 @@
     <br>
     <?php
       echo $this->Form->submit(__('Create',true), array('class' => 'btn btn-success'));
-      echo $this->Form->button(
-          'Back', 
-          array(
-            'formaction' => Router::url(
-                array('controller' => 'categories','action' => 'index')
-            ),
-            'class' => 'btn btn-default'
-          )
-      );
+      echo "<button class='btn btn-default' onclick='goBack()'>Go Back</button>";
       echo $this->Form->end();
     ?>
     </div>
   </div>
-</div>
-<div class="actions">
-  <h3><?php echo __('Actions'); ?></h3>
-  <ul>
-    <li><?php echo $this->Html->link(__('List Categories'),   array('action'     => 'index')); ?></li>
-    <li><?php echo $this->Html->link(__('List Transactions'), array('controller' => 'transactions', 'action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New Transaction'),   array('controller' => 'transactions', 'action' => 'add')); ?> </li>
-  </ul>
 </div>

@@ -5,7 +5,7 @@
       <?php echo $this->Html->link(__('Add Wallet'), array('action' => 'add'), array('class'=>'button btn btn-success')); ?>
     </div>
   </div>
-  <table cellpadding="0" cellspacing="0" class="table table-striped table-hover">
+  <table class="table table-striped table-hover">
   <thead>
   <tr>
     <th><?php echo $this->Paginator->sort('name'); ?></th>
@@ -19,7 +19,7 @@
   <?php foreach ($wallets as $wallet): ?>
   <tr>
     <td><?php echo h($wallet['Wallet']['name']); ?>&nbsp;</td>
-    <td><?php if (h($wallet['Wallet']['current'])==true): ?>
+    <td><?php if (h($wallet['Wallet']['current'])): ?>
       <span class="glyphicon glyphicon-ok"></span>
     <?php endif ?></td>
     <td><?php echo $this->App->adddotstring(h($wallet['Wallet']['expense'])); ?>&nbsp;</td>

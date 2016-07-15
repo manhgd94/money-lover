@@ -9,7 +9,7 @@
     <h3>Thu</h3>
     <table class="table table-hover">
       <?php foreach ($categories as $category): ?>
-        <?php if ($category['Category']['type'] == 0 && $category['Category']['pid'] == 0): ?>
+        <?php if (!$category['Category']['type'] && !$category['Category']['pid']): ?>
           <tr class="cat-p">
             <td><?php echo $this->Html->link(h(__($category['Category']['name'])), array('action' => 'view', $category['Category']['id'])); ?></td>
             <td>
@@ -54,7 +54,7 @@
     <h3>Chi</h3>
     <table class="table table-hover">
       <?php foreach ($categories as $category): ?>
-        <?php if ($category['Category']['type'] == 1 && $category['Category']['pid'] == 0): ?>
+        <?php if ($category['Category']['type'] && !$category['Category']['pid']): ?>
           <tr class="cat-p">
             <td><?php echo $this->Html->link(h(__($category['Category']['name'])), array('action' => 'view', $category['Category']['id'])); ?></td>
             <td>

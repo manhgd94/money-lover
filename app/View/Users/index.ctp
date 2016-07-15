@@ -5,7 +5,7 @@
       <?php echo $this->Html->link(__('Add User'), array('action' => 'add'), array('class'=>'button btn btn-success')); ?>
     </div>
   </div>
-  <table cellpadding="0" cellspacing="0" class="table table-striped table-hover">
+  <table class="table table-striped table-hover">
   <thead>
   <tr>
       <th><?php echo $this->Paginator->sort('name'); ?></th>
@@ -28,7 +28,7 @@
         <?php echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class' => 'avatar-img')); ?>
       <?php endif ?>
     </td>
-    <td><?php if (h($user['User']['active'])==true): ?>
+    <td><?php if (h($user['User']['active'])): ?>
       <span class="glyphicon glyphicon-ok"></span>
     <?php else: ?>
       <span class="glyphicon glyphicon-remove"></span>

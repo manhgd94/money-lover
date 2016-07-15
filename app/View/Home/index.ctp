@@ -1,6 +1,6 @@
 <div class="panel-group" id="accordion">
   <?php foreach ($wallets as $wl): ?>
-    <div class="panel panel-default <?php if ($wl['Wallet']['current'] == true) echo "panel-success"?>">
+    <div class="panel panel-default <?php if ($wl['Wallet']['current']) echo "panel-success"?>">
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $wl['Wallet']['id']; ?>">
@@ -25,23 +25,29 @@
                 <tr>
                   <td><?php echo $trs['Transaction']['name']; ?></td>
                   <td><?php echo $trs['Transaction']['note']; ?></td>
-                  <td><?php echo $this->App->adddotstring($trs['Transaction']['money']); ?></td>
+                  <?php if ($trs['Category']['type']): ?>
+                    <td class="text-danger">
+                  <?php else: ?>
+                    <td class="text-success">
+                  <?php endif ?>
+                    <?php echo $this->App->adddotstring($trs['Transaction']['money']); ?>
+                  </td>
                   <td><?php echo $trs['Transaction']['created']; ?></td>
                   <td class="actions">
                     <?php
                       echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-search')),
-                        array('controller' => 'wallets', 'action' => 'view', $trs['Wallet']['id']),
+                        array('controller' => 'Transactions', 'action' => 'view', $trs['Transaction']['id']),
                         array('class'=>'button btn btn-sm btn-info', 'escape'=>false));
                     ?>
                     <?php
                       echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')),
-                        array('controller' => 'wallets', 'action' => 'edit', $trs['Wallet']['id']),
+                        array('controller' => 'Transactions', 'action' => 'edit', $trs['Transaction']['id']),
                         array('class'=>'button btn btn-sm btn-success', 'escape'=>false));
                     ?>
                     <?php
                       echo $this->Form->postLink($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')),
-                        array('controller' => 'wallets', 'action' => 'delete', $trs['Wallet']['id']),
-                        array('confirm' => __('Are you sure you want to delete # %s?', $trs['Wallet']['id']),
+                        array('controller' => 'Transactions', 'action' => 'delete', $trs['Transaction']['id']),
+                        array('confirm' => __('Are you sure you want to delete # %s?', $trs['Transaction']['id']),
                               'class'=>'button btn btn-sm btn-danger', 'escape'=>false));
                     ?>
                   </td>

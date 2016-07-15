@@ -96,3 +96,6 @@ img.avatar-img{
 	float: left;
 	margin-right: 5px;
 }
+.clear{
+	clear: both;
+}
