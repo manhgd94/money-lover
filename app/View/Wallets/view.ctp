@@ -34,26 +34,13 @@
     </div>
   </div>
 </div>
-<div class="actions">
-  <h3><?php echo __('Actions'); ?></h3>
-  <ul>
-    <li><?php echo $this->Html->link(__('Edit Wallet'), array('action' => 'edit', $wallet['Wallet']['id'])); ?> </li>
-    <li><?php echo $this->Form->postLink(__('Delete Wallet'), array('action' => 'delete', $wallet['Wallet']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $wallet['Wallet']['id']))); ?> </li>
-    <li><?php echo $this->Html->link(__('List Wallets'), array('action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New Wallet'), array('action' => 'add')); ?> </li>
-    <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-    <li><?php echo $this->Html->link(__('List Transactions'), array('controller' => 'transactions', 'action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New Transaction'), array('controller' => 'transactions', 'action' => 'add')); ?> </li>
-  </ul>
-</div>
+<div class="clear"></div>
 <div class="related">
   <h3><?php echo __('Related Transactions'); ?></h3>
   <?php if (!empty($wallet['Transaction'])): ?>
-  <table cellpadding = "0" cellspacing = "0">
+  <table class="table">
   <tr>
     <th><?php echo __('Id'); ?></th>
-    <th><?php echo __('Wallet Id'); ?></th>
     <th><?php echo __('Category Id'); ?></th>
     <th><?php echo __('Name'); ?></th>
     <th><?php echo __('Note'); ?></th>
@@ -65,7 +52,6 @@
   <?php foreach ($wallet['Transaction'] as $transaction): ?>
     <tr>
       <td><?php echo $transaction['id']; ?></td>
-      <td><?php echo $transaction['wallet_id']; ?></td>
       <td><?php echo $transaction['category_id']; ?></td>
       <td><?php echo $transaction['name']; ?></td>
       <td><?php echo $transaction['note']; ?></td>

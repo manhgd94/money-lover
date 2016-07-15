@@ -29,10 +29,11 @@
     </div>
   </div>
 </div>
+<div class="clear"></div>
 <div class="related">
   <h3><?php echo __('Related Wallets'); ?></h3>
   <?php if (!empty($user['Wallet'])): ?>
-  <table cellpadding = "0" cellspacing = "0">
+  <table class="table">
   <tr>
     <th><?php echo __('Name'); ?></th>
     <th><?php echo __('Current'); ?></th>

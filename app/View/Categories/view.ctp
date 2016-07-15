@@ -15,27 +15,22 @@
         </tr>
         <tr>
           <td><?php echo "<label>Type</label><br>"; ?></td>
-          <td><?php echo h($category['Category']['type']); ?></td>
+          <?php if (!h($category['Category']['type'])): ?>
+            <td><?php echo "Thu"; ?></td>
+          <?php else: ?>
+            <td><?php echo "Chi"; ?></td>
+          <?php endif ?>
         </tr>
       </table>
+      <?php echo $this->Html->link(__('Back'),   array('action' => 'index'), array('class' => 'btn btn-info')); ?>
     </div>
   </div>
 </div>
-<div class="actions">
-  <h3><?php echo __('Actions'); ?></h3>
-  <ul>
-    <li><?php echo $this->Html->link(__('Edit Category'), array('action' => 'edit', $category['Category']['id'])); ?> </li>
-    <li><?php echo $this->Form->postLink(__('Delete Category'), array('action' => 'delete', $category['Category']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $category['Category']['id']))); ?> </li>
-    <li><?php echo $this->Html->link(__('List Categories'), array('action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New Category'), array('action' => 'add')); ?> </li>
-    <li><?php echo $this->Html->link(__('List Transactions'), array('controller' => 'transactions', 'action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New Transaction'), array('controller' => 'transactions', 'action' => 'add')); ?> </li>
-  </ul>
-</div>
+<div class="clear"></div>
 <div class="related">
   <h3><?php echo __('Related Transactions'); ?></h3>
   <?php if (!empty($category['Transaction'])): ?>
-  <table cellpadding = "0" cellspacing = "0">
+  <table class="table table-striped table-hover">
   <tr>
     <th><?php echo __('Id'); ?></th>
     <th><?php echo __('Wallet Id'); ?></th>
