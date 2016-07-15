@@ -16,20 +16,9 @@
     <br>
     <?php
       echo $this->Form->submit(__('Edit',true), array('class'=>'btn btn-success'));
-      echo $this->Html->link(__('Back'),   array('action' => 'index'), array('class' => 'btn btn-info'));
+      echo "<button class='btn btn-default' onclick='goBack()'>Go Back</button>";
       echo $this->Form->end();
     ?>
     </div>
   </div>
-</div>
-<div class="actions">
-  <h3><?php echo __('Actions'); ?></h3>
-  <ul>
-    <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Transaction.id')), array('confirm' => __('Are you sure you want to delete # %s?', $this->Form->value('Transaction.id')))); ?></li>
-    <li><?php echo $this->Html->link(__('List Transactions'), array('action'     => 'index')); ?></li>
-    <li><?php echo $this->Html->link(__('List Wallets'),      array('controller' => 'wallets',    'action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New Wallet'),        array('controller' => 'wallets',    'action' => 'add')); ?> </li>
-    <li><?php echo $this->Html->link(__('List Categories'),   array('controller' => 'categories', 'action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New Category'),      array('controller' => 'categories', 'action' => 'add')); ?> </li>
-  </ul>
 </div>

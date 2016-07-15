@@ -23,7 +23,7 @@
           echo h($user['User']['email'])."<br>";
           echo "<label>Ngày tạo</label><br>";
           echo h($user['User']['created'])."<br>";
-          echo $this->Html->link(__('Back'),   array('action' => 'index'), array('class' => 'btn btn-info'));
+          echo "<button class='btn btn-default' onclick='goBack()'>Go Back</button>";
         ?>
       </div>
     </div>

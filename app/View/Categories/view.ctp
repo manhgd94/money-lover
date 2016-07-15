@@ -22,7 +22,7 @@
           <?php endif ?>
         </tr>
       </table>
-      <?php echo $this->Html->link(__('Back'),   array('action' => 'index'), array('class' => 'btn btn-info')); ?>
+      <?php echo "<button class='btn btn-default' onclick='goBack()'>Go Back</button>"; ?>
     </div>
   </div>
 </div>

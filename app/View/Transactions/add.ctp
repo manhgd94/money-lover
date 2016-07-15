@@ -15,7 +15,7 @@
     <br>
     <?php
       echo $this->Form->submit(__('Create',true), array('class' => 'btn btn-success'));
-      echo $this->Html->link(__('Back'),   array('action' => 'index'), array('class' => 'btn btn-info'));
+      echo "<button class='btn btn-default' onclick='goBack()'>Go Back</button>";
       echo $this->Form->end();
     ?>
     </div>
