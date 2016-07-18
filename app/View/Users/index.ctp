@@ -22,11 +22,13 @@
     <td><?php echo h($user['User']['name']); ?>&nbsp;</td>
     <td><?php echo h($user['User']['email']); ?>&nbsp;</td>
     <td>
-      <?php if (!empty($user['User']['avatar'])): ?>
-        <?php echo $this->Html->image(h($user['User']['avatar']), array('alt' => 'avatar', 'class'=>'avatar-img')); ?>
-      <?php else: ?>
-        <?php echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class' => 'avatar-img')); ?>
-      <?php endif ?>
+      <?php
+        if (!empty($user['User']['avatar'])):
+          echo $this->Html->image(h($user['User']['avatar']), array('alt' => 'avatar', 'class'=>'avatar-img'));
+        else:
+          echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class' => 'avatar-img'));
+        endif;
+      ?>
     </td>
     <td><?php if (h($user['User']['active'])): ?>
       <span class="glyphicon glyphicon-ok"></span>

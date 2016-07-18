@@ -7,11 +7,11 @@
       <?php echo $this->Form->create('User', array('type' => 'file')); ?>
       <div class="avatar">
         <?php
-          if (!empty($this->request->data['User']['avatar'])) {
+          if (!empty($this->request->data['User']['avatar'])):
             echo $this->Html->image(h($this->request->data['User']['avatar']), array('alt' => 'avatar', 'class'=>'avatar-img'));
-          } else {
+          else:
             echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class' => 'avatar-img'));
-          }
+          endif;
           echo $this->Form->input('avatar', array('label'=>false, 'type'=>'file', 'class'=>'form-control', 'required' => false));
         ?>
       </div>
