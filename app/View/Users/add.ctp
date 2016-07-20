@@ -4,7 +4,17 @@
       <h3 class="panel-title">Create account</h3>
     </div>
     <div class="panel-body">
-      <?php echo $this->Form->create('User', array('type' => 'file')); ?>
+      <?php
+        echo $this->Form->create('User', array(
+          'type'  => 'file',
+          'class' => 'form',
+          'role'  => 'form',
+          'inputDefaults' => array(
+            'div'     => array('class' => 'form-group'),
+            'label'   => array('class' => 'control-label'),
+            'error'   => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline')),
+        )));
+      ?>
       <div class="avatar">
         <?php
           echo $this->Html->image('icon-profile.png', array('alt' => 'avatar', 'class' => 'avatar-img'));
@@ -17,9 +27,6 @@
           echo $this->Form->input('username', array('class' => 'form-control'));
           echo $this->Form->input('password', array('class' => 'form-control'));
           echo $this->Form->input('email',    array('class' => 'form-control'));
-        ?>
-        <br>
-        <?php
           echo $this->Form->submit(__('Create',true), array('class' => 'btn btn-success'));
           echo "<button class='btn btn-default' onclick='goBack()'>Go Back</button>";
           echo $this->Form->end();

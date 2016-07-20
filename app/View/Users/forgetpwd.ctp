@@ -4,15 +4,19 @@
       <h3 class="panel-title">Forgot Password</h3>
     </div>
     <div class="panel-body">
-      <?php echo $this->Form->create('User'); ?>
-        <?php
-          echo $this->Form->input('email', array('class'=>'form-control'));
-        ?>
-        <br>
-        <?php
-          echo $this->Form->submit(__('Recover',true), array('class'=>'btn btn-success')); 
-          echo $this->Form->end();
-        ?>
+      <?php
+        echo $this->Form->create('User', array(
+          'class' => 'form',
+          'role'  => 'form',
+          'inputDefaults' => array(
+            'div'     => array('class' => 'form-group'),
+            'label'   => array('class' => 'control-label'),
+            'error'   => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline')),
+        )));
+        echo $this->Form->input('email', array('class'=>'form-control'));
+        echo $this->Form->submit(__('Recover',true), array('class'=>'btn btn-success')); 
+        echo $this->Form->end();
+      ?>
     </div>
   </div>
 </div>

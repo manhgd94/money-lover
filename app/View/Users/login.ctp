@@ -1,4 +1,12 @@
-<?php echo $this->Form->create('User',array('class'=>'form-signin','inputDefaults'=>array())); ?>
+<?php echo $this->Form->create('User',array(
+  'class'=>'form-signin',
+  'inputDefaults'=>array(),
+  'role'  => 'form',
+  'inputDefaults' => array(
+    'div'     => array('class' => 'form-group'),
+    'label'   => array('class' => 'control-label'),
+    'error'   => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline')),
+))); ?>
 <div class="login-container">
   <h2 class="form-signin-heading">Please log in</h2>
   <div class="controls">
@@ -13,8 +21,9 @@
       <?php
         echo $this->Html->link('Create an account', array('controller'=>'users', 'action'=>'add'));
         echo "<span class='space'>|</span>";
-        echo $this->Html->link('Forgot password',   array('controller'=>'users', 'action'=>'forgetpwd')); ?>
+        echo $this->Html->link('Forgot password',   array('controller'=>'users', 'action'=>'forgetpwd'));
+      ?>
     </div>
-    <?php echo $this->Form->end();?>
   </div>
 </div>
+<?php echo $this->Form->end();?>
