@@ -4,8 +4,15 @@
       <h3 class="panel-title">Edit category</h3>
     </div>
     <div class="panel-body">
-    <?php echo $this->Form->create('Category'); ?>
     <?php
+      echo $this->Form->create('Category', array(
+          'class' => 'form',
+          'role'  => 'form',
+          'inputDefaults' => array(
+            'div'     => array('class' => 'form-group'),
+            'label'   => array('class' => 'control-label'),
+            'error'   => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline')),
+        )));
       echo $this->Form->input('pid', array(
         'type'    => 'select',
         'options' => $opt, // typically set from $this->find('list') in controller 
@@ -20,11 +27,14 @@
       ));
       echo $this->Form->input('name', array('class' => 'form-control'));
       $options    = array('0' => 'Thu', '1' => 'Chi');
-      $attributes = array('legend' => false);
-      echo $this->Form->radio('type', $options, $attributes);
-    ?>
-    <br>
-    <?php
+      echo $this->Form->input('type', array(
+        'legend' => false,
+        'before' => "<label class='radio-inline'>",
+        'after' => '</label>',
+        'separator' => "</label><label class='radio-inline'>",
+        'options' => $options,
+        'type' => 'radio'
+      ));
       echo $this->Form->submit(__('Create',true), array('class' => 'btn btn-success'));
       echo "<button class='btn btn-default' onclick='goBack()'>Go Back</button>";
       echo $this->Form->end();
