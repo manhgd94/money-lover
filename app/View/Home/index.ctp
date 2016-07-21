@@ -24,7 +24,7 @@
               <?php if ($wl['Wallet']['id'] == $trs['Transaction']['wallet_id']): ?>
                 <tr>
                   <td><?php echo $trs['Transaction']['name']; ?></td>
-                  <td><?php echo $trs['Transaction']['note']; ?></td>
+                  <td><?php echo $this->Text->autoParagraph($trs['Transaction']['note']); ?></td>
                   <?php if ($trs['Category']['type']): ?>
                     <td class="text-danger">
                   <?php else: ?>

@@ -11,7 +11,7 @@
       <?php foreach ($categories as $category): ?>
         <?php if (!$category['Category']['type'] && !$category['Category']['pid']): ?>
           <tr class="cat-p">
-            <td><?php echo $this->Html->link(h(__($category['Category']['name'])), array('action' => 'view', $category['Category']['id'])); ?></td>
+            <td><?php echo $this->Html->link($category['Category']['name'], array('action' => 'view', $category['Category']['id'])); ?></td>
             <td>
               <?php
                 echo $this->Html->link($this->Html->tag('span', '',array('class' => 'glyphicon glyphicon-edit')),
@@ -29,7 +29,7 @@
           <?php foreach ($categories as $cat): ?>
             <?php if ($cat['Category']['pid'] == $category['Category']['id']): ?>
               <tr>
-                <td class="cat-sub"><?php echo $this->Html->link(h(__($cat['Category']['name'])), array('action' => 'view', $cat['Category']['id'])); ?></td>
+                <td class="cat-sub"><?php echo $this->Html->link($cat['Category']['name'], array('action' => 'view', $cat['Category']['id'])); ?></td>
                 <td>
                   <?php
                     echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')),
@@ -56,7 +56,7 @@
       <?php foreach ($categories as $category): ?>
         <?php if ($category['Category']['type'] && !$category['Category']['pid']): ?>
           <tr class="cat-p">
-            <td><?php echo $this->Html->link(h(__($category['Category']['name'])), array('action' => 'view', $category['Category']['id'])); ?></td>
+            <td><?php echo $this->Html->link($category['Category']['name'], array('action' => 'view', $category['Category']['id'])); ?></td>
             <td>
               <?php
                 echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')),
@@ -74,7 +74,7 @@
           <?php foreach ($categories as $cat): ?>
             <?php if ($cat['Category']['pid'] == $category['Category']['id']): ?>
               <tr>
-                <td class="cat-sub"><?php echo $this->Html->link(h(__($cat['Category']['name'])), array('action' => 'view', $cat['Category']['id'])); ?></td>
+                <td class="cat-sub"><?php echo $this->Html->link($cat['Category']['name'], array('action' => 'view', $cat['Category']['id'])); ?></td>
                 <td>
                   <?php
                     echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')),

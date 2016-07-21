@@ -42,7 +42,7 @@
   <?php foreach ($transactions as $transaction): ?>
   <tr>
     <td><?php echo h($transaction['Transaction']['name']); ?>&nbsp;</td>
-    <td><?php echo h($transaction['Transaction']['note']); ?>&nbsp;</td>
+    <td><?php echo $this->Text->autoParagraph($transaction['Transaction']['note']); ?>&nbsp;</td>
     <td><?php echo $this->App->adddotstring(h($transaction['Transaction']['money'])); ?>&nbsp;</td>
     <td><?php echo h($transaction['Transaction']['created']); ?>&nbsp;</td>
     <td class="actions">

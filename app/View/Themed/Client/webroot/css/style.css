@@ -67,6 +67,9 @@ html{
     border-radius: 4px;
 }
 img.avatar-img{
+	width: 55px;
+}
+.avatar img.avatar-img{
 	width: 100%;
 }
 .clearfix{
