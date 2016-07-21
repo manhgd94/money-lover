@@ -29,10 +29,6 @@ class User extends AppModel {
                 'message' => 'Only alphabets and numbers allowed',
                 'last'    => false
             ),
-            'minLength' => array(
-                'rule'    => array('minLength', 8),
-                'message' => 'Minimum length of 8 characters'
-            ),
             'isUnique' => array(
                 'rule'    => 'isUnique',
                 'message' => 'The username has already been taken',
@@ -49,7 +45,7 @@ class User extends AppModel {
                 //'allowEmpty' => false,
                 //'required' => false,
                 //'last' => false, // Stop validation after this rule
-                'on'   => 'create', // Limit validation to 'create' or 'update' operations
+                // 'on'   => 'create', // Limit validation to 'create' or 'update' operations
             ),
             'minLength' => array(
                 'rule'    => array('minLength', 8),
@@ -116,7 +112,7 @@ class User extends AppModel {
         if ($this->data['User']['password'] == "") {
             unset($this->data['User']['password']);
         }
-        if ($this->data['User']['avatar'] == "") {
+        if (isset($this->data['User']['avatar']) && $this->data['User']['avatar'] == "") {
             unset($this->data['User']['avatar']);
         }
         

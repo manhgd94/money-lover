@@ -224,9 +224,9 @@ public function beforeFilter() {
                         $ms   = $url;
                         $ms   = wordwrap($ms,1000);
                         //debug($url);
-                        $fu['User']['tokenhash'] = $key;
+                        $fu['User']['tokenhash_rs'] = $key;
                         $this->User->id=$fu['User']['id'];
-                        if ($this->User->saveField('tokenhash',$fu['User']['tokenhash'])) {
+                        if ($this->User->saveField('tokenhash_rs',$fu['User']['tokenhash_rs'])) {
                             //============Email================//
                             App::uses('CakeEmail', 'Network/Email');
                             $email = new CakeEmail('smtp');
@@ -260,14 +260,14 @@ public function beforeFilter() {
     function reset($token=null){
         $this->User->recursive = -1;
         if (!empty($token)) {
-            $u = $this->User->findBytokenhash($token);
+            $u = $this->User->findBytokenhash_rs($token);
             if ($u) {
                 $this->User->id = $u['User']['id'];
                 if (!empty($this->data)) {
                     $this->User->data = $this->data;
                     $this->User->data['User']['username'] = $u['User']['username'];
                     $new_hash = sha1($u['User']['username'].rand(0,100));//created token
-                    $this->User->data['User']['tokenhash'] = $new_hash;
+                    $this->User->data['User']['tokenhash_rs'] = $new_hash;
                     if ($this->data['User']['password'] === $this->data['User']['password_confirm']) {
                         if ($this->User->save($this->User->data)) {
                             $this->Flash->success(__('Password Has been Updated'));
